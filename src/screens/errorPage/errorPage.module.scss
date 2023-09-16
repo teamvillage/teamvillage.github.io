@@ -1,0 +1,21 @@
+@import '../../assets/theme/index.scss';
+
+#errorPage {
+  width: 100vw;
+  height: 30vh;
+  margin-top: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    font-weight: bold;
+    font-size: 7vh;
+  }
+
+  i {
+    font-style: italic;
+    color: $lightText;
+  }
+}

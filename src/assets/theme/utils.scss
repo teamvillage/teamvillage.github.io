@@ -1,0 +1,10 @@
+$viewport-width: 1194;
+$viewport-height: 810;
+
+@function px2vw($value) {
+  @return ($value / $viewport-width) * 100vw;
+}
+
+@function px2vh($value) {
+  @return ($value / $viewport-height) * 100vh;
+}

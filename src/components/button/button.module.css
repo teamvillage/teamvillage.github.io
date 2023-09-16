@@ -1,0 +1,10 @@
+.customButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.clicked {
+    filter: brightness(0.8);
+  }
+}
+
