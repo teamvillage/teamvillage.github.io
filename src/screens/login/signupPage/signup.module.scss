@@ -5,228 +5,227 @@
   height: 100vh;
 
   .signup {
-    width: px2vw(799);
-    min-width: 482px;
+    width: 799px;
 
     .header {
-      display: flex;
-      
-      div {
-        border: 1px solid $boldText;
-        border-radius: 22px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: px2vh(9) px2vh(16.5);
-        margin: px2vh(30) px2vw(15) 0 0;
-
-        &:first-of-type {
-          background-color: $mainColor;
-          padding: px2vh(9) px2vh(27);
-          border: 0;
-          margin-left: px2vw(30);
-
-          p {
-            font-size: px2vh(16.74);
-            color: $boldText 
-          }
-        }
-
-        p {
-          font-size: px2vh(15);
-          line-height: px2vh(15);
-          color: #474747;
-        }
-      }
+      margin: 28px 0 105px 30px;
+      cursor: pointer;
     }
 
     .content {
-      min-width: 482px;
-      width: px2vw(482);
-      margin: px2vh(57) auto 0;
+      width: 482px;
+      margin: auto;
 
-      .carousel {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-
-        div {
-          width: px2vh(12);
-          height: px2vh(12);
-          border-radius: 100%;
-          margin-left: px2vh(17);
-
-          &:first-of-type {
-            margin-left: 0;
-          }
-
-          &.deactive {
-            background-color: $subColor;
-          }
-
-          &.active {
-            background-color: $mainColor;
-          }
-        }
+      & > div:not(.active) {
+        display: none;
       }
 
-      .header {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
+      .page {
+        .headerInfo {
+          margin-bottom: 51px;
+        }
+        
         .h1 {
-          font-size: px2vh(20);
-          line-height: px2vh(35);
-          color: $boldText;
+          font-size: 20px;
+          line-height: 27px;
+          color: $JH_K_100;
+          text-align: center;
         }
 
         .h2 {
-          font-size: px2vh(15);
-          line-height: px2vh(35);
-          font-weight: 500;
-          color: $boldText;
+          font-size: 13px;
+          line-height: 18px;
+          color: $JH_K_25;
+          text-align: center;
+          margin-top: 21px;
         }
-      }
 
-      label {
-        font-size: px2vh(20);
-        line-height: px2vh(35);
-        color: $boldText;
-      }
+        .form {
+          width: 100%;
 
-      input {
-        border: 0.8px solid #50B36B;
-        background-color: #FAFDFB;
-        height: px2vh(46);
-        border-radius: 10px;
-        padding: 4.5px 16px;
-        box-sizing: border-box;
-        font-size: px2vh(13);
-        font-weight: 400;
-        flex-grow: 1;
-
-        &::placeholder {
-          color: #989898;
-        }
-      }
-
-      .inputForm {
-        display: flex;
-        align-items: center;
-
-        .btn {
-          min-width: 84px;
-          width: px2vw(84);
-          height: px2vh(44);
-          background-color: #313131;
-          border: 0.8px solid #454545;
-          border-radius: 23px;
-          margin-left: px2vw(14);
-          
-          p {
-            color: $subColor;
-            font-size: px2vh(13);
+          label:has(span) {
+            font-size: 18px;
+            line-height: 25px;
+            color: $JH_K_100;
+    
+            span {
+              color: $JH_B_MAIN_100;
+            }
+    
+            & + .empty {
+              height: 12px;
+            }
           }
-        }
 
-        .hideBtn {
-          visibility: hidden;
-        }
-      }
-
-      .okBtn {
-        margin: 0 auto;
-        width: px2vw(364);
-        min-width: 364px;
-        height: px2vh(33);
-        background-color: $mainColor;
-        color: white;
-        border-radius: 7px;
-
-        p {
-          font-size: px2vh(15);
-          line-height: px2vh(16);
+          .empty {
+            width: 20px;
+          }
+    
+          .inputForm {
+            display: flex;
+            align-items: center;
+    
+            input {
+              border: 1px solid $JH_K_10;
+              height: 34px;
+              border-radius: 11px;
+              padding: 8px 14px;
+              box-sizing: border-box;
+              font-size: 13px;
+              line-height: 18px;
+              font-weight: 400;
+              flex-grow: 1;
+      
+              &::placeholder {
+                color: $JH_K_50;
+              }
+    
+              &:focus {
+                outline: none;
+                border-color: $JH_B_MAIN_100;
+              }
+            }
+    
+            .btn {
+              width: 84px;
+              height: 34px;
+              background-color: $SUB_20;
+              border-radius: 23px;
+              margin-left: 14px;
+              
+              p {
+                color: $JH_K_100;
+                font-size: 13px;
+                line-height: 18px;
+              }
+            }
+    
+            .hideBtn {
+              visibility: hidden;
+            }
+          }
         }
       }
 
       .page1 {
-        margin: px2vh(41) auto 0;
-
         .form {
-          margin-top: px2vh(64);
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-
           .userInfo {
-            margin-top: px2vh(13);
+            margin-top: 25px;
             display: flex;
-            justify-content: space-between;
-            
+            align-items: center;
+
             .number {
-              display: flex;
-              flex-direction: column;
               flex-grow: 1;
             }
 
             .major {
-              display: flex;
-              flex-direction: column;
-              margin-left: px2vw(20);
               flex-grow: 1;
             }
           }
 
           .emailForm {
-            margin-top: px2vh(13);
+            margin-top: 25px;
 
             .code {
-              margin-top: px2vh(12);
+              margin-top: 15px;
             }
           }
         }
 
         .okBtn {
-          margin-top: px2vh(75);
+          margin: 67px auto 0;
+          width: 364px;
+          height: 34px;
+          background-color: $JH_B_MAIN_100;
+          border-radius: 5px;
+  
+          p {
+            font-size: 13px;
+            line-height: 18px;
+            font-weight: 700;
+            color: $JH_K_0;
+          }
         }
       }
 
       .page2 {
-        margin: px2vh(41) auto 0;
-
         .form {
-          margin-top: px2vh(39);
-
           .idForm {
-            margin-top: px2vh(13);
+            margin-top: 25px;
           }
-  
+
           .pwForm {
-            margin-top: px2vh(6);
-  
-            .pwInput {
-              margin-top: px2vh(9);
-            }
-            
-            .pwCheck {
-              margin-top: px2vh(14);
-            }
+            margin-top: 25px;
+          }
+
+          .pwCheck {
+            margin-top: 15px;
           }
         }
 
         .okBtn {
-          margin-top: px2vh(96);
+          margin-top: 67px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          & > div {
+            width: 172px;
+            height: 34px;
+            border-radius: 5px;
+            box-sizing: border-box;
+
+            p {
+              font-size: 13px;
+              font-weight: 700;
+              line-height: 18px;
+            }
+          }
+
+          .prev {
+            border: 1px solid $JH_B_MAIN_100;
+            background-color: $JH_K_0;
+            margin-right: 20px;
+
+            p {
+              color: $JH_B_MAIN_100;
+            }
+          }
+
+          .next {
+            background-color: $JH_B_MAIN_100;
+
+            p {
+              color: $JH_K_0;
+            }
+          }
         }
       }
 
       .page3 {
-        margin: px2vh(149) auto 0;
+        .headerInfo {
+          display: flex;
+          justify-content: center;
+          margin: 0;
+        }
+
+        .comment {
+          margin-top: 166px;
+        }
 
         .okBtn {
-          margin-top: px2vh(358);
+          margin: 244px auto 0;
+          width: 364px;
+          height: 34px;
+          background-color: $JH_B_MAIN_100;
+          border-radius: 5px;
+          
+          p {
+            font-size: 13px;
+            line-height: 18px;
+            font-weight: 700;
+            color: $JH_K_0;
+          }
         }
       }
     }

@@ -1,0 +1,45 @@
+@import '../../assets/theme/colors.scss';
+
+.inputForm {
+  position: relative;
+  width: 100%;
+  height: 44px;
+
+  input {
+    position: absolute;
+    width: 100%;
+    border: 0.8px solid $JH_K_25;
+    border-radius: 10px;
+    height: 39px;
+    padding: 0 15px;
+    box-sizing: border-box;
+
+    &.focused {
+      border-color: $JH_B_MAIN_100;
+      outline: none;
+    }
+  }
+
+  div {
+    position: absolute;
+    background-color: white;
+    margin: 0;
+    left: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -5px;
+    padding: 0 5px;
+
+    label {
+      font-size: 8px;
+      font-weight: 400;
+      text-align: center;
+      color: $JH_K_25;
+
+      &.focused {
+        color: $JH_B_MAIN_100;
+      }
+    }
+  }
+}

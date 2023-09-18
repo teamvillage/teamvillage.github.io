@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 
 export { default as Button } from './button/Button';
+export { default as Input } from './input/Input';
 
 interface IUseInterval {
   (callback: () => void, interval: number): void;
