@@ -232,7 +232,11 @@
   }
 
   .background {
-    width: px2vw(395);
-    background-image: url("http://via.placeholder.com/395x810");
+    flex-grow: 1;
+    background-color: #F3F5FE;
+
+    img {
+      width: 100%;
+    }
   }
 }

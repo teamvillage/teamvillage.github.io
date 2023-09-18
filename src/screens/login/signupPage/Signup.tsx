@@ -9,12 +9,15 @@ function Signup() {
   const [page, setPage] = useState(1);
   const [logoImage, setLogoImage] = useState('');
   const [signupCompleteIcon, setSignupCompleteIcon] = useState('');
+  const [backgroundImage, setBackgroundImage] = useState('');
 
   useEffect(() => {
     loadAsset('logo_long.png', assetType.image)
       .then(img => setLogoImage(img.default));
     loadAsset('signup_complete_icon.png', assetType.image)
       .then(img => setSignupCompleteIcon(img.default));
+      loadAsset('Background_signup.png', assetType.image)
+        .then(img => setBackgroundImage(img.default));
   }, []);
 
   const inputContextWithButton = (
@@ -158,7 +161,9 @@ function Signup() {
           <div className={page == 3 ? styles.active : ''}> {page3()} </div>
         </div>
       </div>
-      <div className={styles.background}></div>
+      <div className={styles.background}>
+        <img src={backgroundImage} alt='logo' />
+      </div>
     </div>
   )
 }

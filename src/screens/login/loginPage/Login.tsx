@@ -13,9 +13,8 @@ function Login() {
   useEffect(() => {
     loadAsset('logo_long.png', assetType.image)
       .then(img => setLogoImage(img.default));
-    
-    // TODO: set background imgae
-    setBackgroundImage('http://via.placeholder.com/779x810');
+    loadAsset('Background_login.png', assetType.image)
+      .then(img => setBackgroundImage(img.default));
   }, []);
 
   // TODO: login function
