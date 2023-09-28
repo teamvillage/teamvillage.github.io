@@ -1,0 +1,291 @@
+@import '../../../../../assets/theme/index.scss';
+
+.container {
+  width: 100%;
+  height: px2vh(667);
+  border: 1px solid $JH_K_10;
+  border-radius: 15px;
+  box-shadow: 0 0 10px #0000000D;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.instruction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .icon {
+    margin-top: 100px;
+    height: 20px;
+    text-align: center;
+  }
+
+  .title {
+    margin-top: 32px;
+    font-size: 20px;
+    line-height: 27px;
+    color: $JH_K_100;
+    text-align: center;
+  }
+
+  .subtitle {
+    margin-top: 9px;
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 500;
+    color: $JH_K_100;
+    text-align: center;
+  }
+
+  .content {
+    margin-top: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 557px;
+    height: 121px;
+
+    div {
+      text-align: center;
+
+      img {
+        width: 30px;
+        margin-bottom: 12px;
+      }
+
+      div {
+        border-right: 1.5px solid $JH_K_25;
+        padding: 6px 0;
+
+        p {
+          font-size: 15px;
+          line-height: 18px;
+          font-weight: 500;
+        }
+      }
+
+      &:last-of-type > div {
+        border: none;
+      }
+    }
+
+    .search {
+      width: 145px;
+    }
+
+    .check {
+      width: 232px;
+    }
+
+    .flag {
+      width: 139px;
+    }
+  }
+
+  .startTest {
+    margin-top: 106px;
+    width: 275px;
+    height: 34px;
+    border-radius: 5px;
+    background-color: $JH_B_MAIN_100;
+
+    p {
+      color: $JH_K_0;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 18px;
+    }
+  }
+}
+
+.instructionStart {
+  .content {
+    background-color: $SUB_20;
+    border-radius: 15px;
+
+    .problemInstruction {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      div {
+        display: flex;
+        align-items: center;
+
+        p {
+          font-size: 15px;
+          line-height: 18px;
+          color: $JH_K_100;
+          font-weight: 600;
+        }
+        
+        img {
+          width: 13px;
+          height: 13px;
+          margin: 0 13.5px 0 0;
+        }
+      }
+    }
+  }
+}
+
+.question {
+  margin-top: 150px;
+
+  .questionInstruction {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    p {
+      font-size: 15px;
+      line-height: 18px;
+      color: $JH_K_75;
+    }
+
+    .timer {
+      display: flex;
+      align-items: center;
+      background-color: $JH_B_MAIN_100;
+      border-radius: 15px;
+      padding: 4px 10px;
+
+      img {
+        width: 8px;
+        margin-right: 4px;
+      }
+
+      p {
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 13px;
+        color: $JH_K_0;
+      }
+    }
+  }
+
+  .questions {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .optionInst {
+      width: 230px;
+      box-sizing: border-box;
+      padding: 21px 0;
+      
+      &:first-of-type {
+        border-right: 2px solid $JH_K_75;
+        padding-right: 50px;
+      }
+
+      &:last-of-type {
+        padding-left: 50px;
+      }
+
+      p {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 27px;
+        color: $JH_K_100;
+        white-space: pre-line;
+        text-align: center;
+      }
+    }
+  }
+
+  .selectRadio {
+    margin-top: 37px;
+    display: flex;
+    align-items: center;
+
+    .option {
+      margin: 0 17.5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      p {
+        font-size: 13px;
+        line-height: 18px;
+      }
+
+      input {
+        border: 2px solid $JH_K_75;
+
+        &:checked {
+          accent-color: $JH_B_MAIN_100;
+        }
+
+        &:hover {
+          accent-color: $JH_B_MAIN_100;
+        }
+      }
+
+      &:nth-of-type(1), &:nth-of-type(5) {
+        input {
+          width: 42px;
+          height: 42px;
+          margin: 4px 0 6px;
+        }
+      }
+      &:nth-of-type(2), &:nth-of-type(4) {
+        input {
+          width: 32px;
+          height: 32px;
+          margin: 9px 0 11px;
+        }
+      }
+      &:nth-of-type(3) {
+        input {
+          width: 22px;
+          height: 22px;
+          margin: 14px 0 16px;
+        }
+      }
+    }
+  }
+
+  .buttons {
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+    .btn {
+      width: 172px;
+      height: 34px;
+      border-radius: 5px;
+      box-sizing: border-box;
+
+      p {
+        font-size: 13px;
+        line-height: 18px;
+        font-weight: 700;
+      }
+    }
+
+    .save {
+      border: 1px solid $JH_B_MAIN_100;
+
+      p {
+        color: $JH_B_MAIN_100;
+      }
+    }
+
+    .pause {
+      background-color: $JH_B_MAIN_100;
+
+      p {
+        color: $JH_K_0;
+      }
+    }
+  }
+}
