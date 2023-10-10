@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
   }
 }
 
@@ -177,7 +178,7 @@
     justify-content: center;
 
     .optionInst {
-      width: 230px;
+      width: 250px;
       box-sizing: border-box;
       padding: 21px 0;
       
@@ -285,6 +286,83 @@
 
       p {
         color: $JH_K_0;
+      }
+    }
+  }
+}
+
+.analyzing {
+  margin: auto;
+
+  .icons {
+    margin-bottom: 31px;
+    display: flex;
+    justify-content: center;
+    height: 42px;
+
+    img {
+      width: 29px;
+      height: 28px;
+      margin-right: 3px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      &:nth-of-type(2n) {
+        margin-top: 7px;
+      }
+
+      &:nth-of-type(odd) {
+        margin-top: -7px;
+      }
+    }
+  }
+
+  .info p {
+    font-size: 15px;
+    line-height: 18px;
+  }
+}
+
+.result {
+  margin: auto;
+
+  .tempImg img {
+    height: 417px;
+  }
+
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+    .download,.ok {
+      width: 172px;
+      border: 1px solid $JH_B_MAIN_100;
+      border-radius: 5px;
+      padding: 8px;
+
+      p {
+        font-size: 13px;
+        line-height: 18px;
+        font-weight: 700;
+      }
+    }
+
+    .download {
+      margin-right: 22px;
+
+      p {
+        color: $JH_B_MAIN_100;
+      }
+    }
+
+    .ok {
+      background-color: $JH_B_MAIN_100;
+
+      p {
+        color: white;
       }
     }
   }

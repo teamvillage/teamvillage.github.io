@@ -3,6 +3,9 @@ import { loadAsset, assetType } from '../../../../../utils/AssetController';
 import { useEffect, useState } from 'react';
 import { Button } from '../../../../../components';
 
+import tempImg from '../../../../../assets/images/temp_screenshot.png';
+import { Link, useNavigate } from 'react-router-dom';
+
 function Tanagement() {
   const [logoIcon, setLogoIcon] = useState('');
   const [searchIcon, setSearchIcon] = useState('');
@@ -10,6 +13,8 @@ function Tanagement() {
   const [flagIcon, setFlagIcon] = useState('');
   const [checkBlackIcon, setCheckBlackIcon] = useState('');
   const [clockIcon, setClockIcon] = useState('');
+  const [homeIcon, setHomeIcon] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadAsset('tanagement_home_icon.png', assetType.image)
@@ -24,6 +29,8 @@ function Tanagement() {
       .then(image => setCheckBlackIcon(image.default));
     loadAsset('clock_icon.svg', assetType.image)
       .then(image => setClockIcon(image.default));
+    loadAsset('home_icon.png', assetType.image)
+      .then(image => setHomeIcon(image.default));
   }, []);
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -105,13 +112,18 @@ function Tanagement() {
 
   const submitQuestion = () => {
     setTimeout(() => {
-      if (currentQuestion == problemList.length - 1)
+      document.getElementsByName('check').forEach(elem => {
+        (elem as HTMLInputElement).checked = false;
+      });
+      if (currentQuestion == problemList.length - 1) {
         setCurrentPage(3);
+        setTimeout(() => {setCurrentPage(4)}, 2000);
+      }
       else {
         setCurrentQuestion(currentQuestion + 1);
         setTimer(25);
       }
-    }, 100);
+    }, 500);
   }
   const questions = (
     <div className={styles.question}>
@@ -130,9 +142,7 @@ function Tanagement() {
           <p>{problemList[currentQuestion][1]}</p>
         </div>
       </div>
-      <form className={styles.selectRadio} 
-      id='selectForm' 
-      onSubmit={submitQuestion}>
+      <form className={styles.selectRadio}>
         <div className={styles.option} onClick={submitQuestion}>
           <p>1</p>
           <input type='radio' name='check'/>
@@ -170,10 +180,47 @@ function Tanagement() {
     </div>
   )
 
+  const analyzing = (
+    <div className={styles.analyzing}>
+      <div className={styles.icons}>
+        <img src={homeIcon} alt='homeIcon' />
+        <img src={homeIcon} alt='homeIcon' />
+        <img src={homeIcon} alt='homeIcon' />
+        <img src={homeIcon} alt='homeIcon' />
+        <img src={homeIcon} alt='homeIcon' />
+      </div>
+      <div className={styles.info}>
+        <p>응답하신 내용을 토대로 결과를 분석중입니다.</p>
+      </div>
+    </div>
+  )
+
+  const checkOk = () => {
+    localStorage.setItem('tanagement', 'ok');
+    navigate(0);
+  }
+  const result = (
+    <div className={styles.result}>
+      <div className={styles.tempImg}>
+        <img src={tempImg} alt='temp' />
+      </div>
+      <div className={styles.buttons}>
+        <Button className={styles.download}>
+          <p>나의 리포트 PDF 다운</p>
+        </Button>
+        <Button className={styles.ok} onClick={checkOk}>
+          <p>확인</p>
+        </Button>
+      </div>
+    </div>
+  )
+
   const pages = [
     instruction,
     instruction_start,
-    questions
+    questions,
+    analyzing,
+    result
   ];
 
   return (
