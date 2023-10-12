@@ -1,0 +1,81 @@
+@import '../../../../../assets/theme/index.scss';
+
+.meeting {
+  .shadow {
+    filter: drop-shadow(1px 0px 0px $JH_K_10)
+            drop-shadow(0px 1px 0px $JH_K_10)
+            drop-shadow(-1px 0px 0px $JH_K_10)
+            drop-shadow(0px -1px 0px $JH_K_10)
+            drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
+  }
+  .background {
+    width: 557px;
+    height: 397px;
+    background-color: $BGC;
+    clip-path: path('M17.6603 4C10.1159 4 4 10.1159 4 17.6603V61.6313V66V381C4 392.046 12.9543 401 24 401H541C552.046 401 561 392.046 561 381V81.6313C561 70.5857 552.046 61.6313 541 61.6313H279.694L245.089 15.8979C239.418 8.40378 230.563 4 221.166 4H17.6603Z');
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 21px 0 0 0;
+
+    img {
+      width: 22px;
+      height: 22px;
+      margin: 0 14px 0 27px;
+    }
+
+    p {
+      font-size: 27px;
+      font-weight: 700;
+      line-height: 32px;
+    }
+  }
+
+  .content {
+    flex-grow: 1;
+    padding: 31px 28px;
+    display: flex;
+    align-items: flex-end;
+
+    .log {
+      flex-grow: 1;
+    }
+
+    .buttons {
+      .btn {
+        width: 120px;
+        height: 41px;
+        border-radius: 35px;
+
+        p {
+          font-size: 18px;
+          line-height: 25px;
+        }
+
+        &.reserve {
+          border: 1px solid $JH_B_MAIN_100;
+          margin-bottom: 11px;
+
+          p {
+            color: $JH_B_MAIN_100;
+          }
+        }
+
+        &.start {
+          background-color: $JH_B_MAIN_100;
+
+          p {
+            color: $JH_K_0;
+          }
+        }
+      }
+    }
+  }
+}
+
+

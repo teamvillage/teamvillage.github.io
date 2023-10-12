@@ -4,12 +4,11 @@ const assetType = {
   css: "theme"
 } as const;
 
-type assetType = typeof assetType[keyof typeof assetType];
+type assetTypes = typeof assetType[keyof typeof assetType];
 
-async function loadAsset(assetName: string, type: assetType) {
+async function loadAsset(assetName: string, type: assetTypes) {
   const filename = await import('../assets/' + type + '/' + assetName);
   return filename;
 }
-
 
 export { assetType, loadAsset }
