@@ -14,47 +14,36 @@ import { useSelector } from 'react-redux';
 
 function Home() {
   const [currentTeam, setCurrentTeam] = useState<ITeamInfo|null>(null);
-  const [content, setContent] = useState(<></>);
-  
-  useEffect(() => {
-    const tanagement_log = localStorage.getItem('tanagement');
-    console.log(tanagement_log)
-    if (tanagement_log === null)
-      setContent(<Tanagement />)
-    else {
-      setContent(mainPage);
-    }
-  }, []);
-
-  const mainPage = (
-    <div className={styles.container}>
-      <div className={styles.top}>
-        <div className={styles.meeting}>
-          <Meeting 
-            title="회의 with AI"
-            meetings={currentTeam?.reports} />
-        </div>
-        <div className={styles.report}>
-          <Report />
-        </div>
-      </div>
-      <div className={styles.bottom}>
-        <div className={styles.teamTask}>
-          <TeamTask />
-        </div>
-        <div className={styles.myTask}>
-          <MyTask />
-        </div>
-        <div className={styles.achievement}>
-          <Achievement />
-        </div>
-      </div>
-    </div>
-  )
+  const tanagement_log = localStorage.getItem('tanagement');
 
   return (
-    <Base onSelectTeam={(team: ITeamInfo) => {setCurrentTeam(team);}}>
-      {content}
+    <Base onSelectTeam={(team: ITeamInfo|null) => {setCurrentTeam(team);}}>
+      {(tanagement_log === null) ? <Tanagement /> : 
+      <div className={styles.container}>
+        <div className={styles.top}>
+          <div className={styles.meeting}>
+            <Meeting 
+              title="회의 with AI"
+              meetings={currentTeam?.reports} />
+          </div>
+          <div className={styles.report}>
+            <Report 
+              reports={currentTeam?.reports} />
+          </div>
+        </div>
+        <div className={styles.bottom}>
+          <div className={styles.teamTask}>
+            <TeamTask />
+          </div>
+          <div className={styles.myTask}>
+            <MyTask />
+          </div>
+          <div className={styles.achievement}>
+            <Achievement />
+          </div>
+        </div>
+      </div>
+      }
     </Base>
   )
 }

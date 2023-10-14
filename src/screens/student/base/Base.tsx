@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { ITeamInfo } from '../../../store/slices/teamSlice';
 
 interface Props {
-  onSelectTeam?: (team: ITeamInfo) => any;
+  onSelectTeam?: (team: ITeamInfo|null) => any;
 }
 
 function Base({children, onSelectTeam=undefined}: PropsWithChildren<Props>) {
@@ -29,13 +29,15 @@ function Base({children, onSelectTeam=undefined}: PropsWithChildren<Props>) {
 
   const changeTeam = (idx: number) => {
     setTeamIdx(idx);
+  }
+  useEffect(() => {
     if (onSelectTeam) {
       if (teamList.length == 0)
-        onSelectTeam({} as ITeamInfo);
+        onSelectTeam(null);
       else
-        onSelectTeam(teamList[idx]);
+        onSelectTeam(teamList[selectedTeamIdx]);
     }
-  }
+  }, [selectedTeamIdx]);
   
   return (
     <div className={styles.container}>

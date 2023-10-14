@@ -18,6 +18,7 @@ export interface ITodoInfo {
 export interface IReportInfo {
   startTime: string;
   title: string;
+  users: Array<IUserInfo>;
   endTime?: string;
   keywords?: Array<string>;
   memo?: Array<[IUserInfo, Array<string>]>;
@@ -69,6 +70,7 @@ let reports: Array<IReportInfo> = [
     title: "나이키 광고 발표 자료 제작",
     startTime: moment('2023-09-23 16:17:00').format(),
     endTime: moment('2023-09-23 17:38:32').format(),
+    users: users,
     keywords: ["이론", "소비자", "흐름파악"],
     memo: users.filter((_, idx) => idx !== 1).map((user, idx) => {
       let list: Array<string> = [];
@@ -151,6 +153,7 @@ let reports: Array<IReportInfo> = [
     title: "나이키 광고 프로포절",
     startTime: moment('2023-09-20').format(),
     endTime: moment('2023-09-20 00:30:04').format(),
+    users: users,
     keywords: ["운동", "다큐멘터리", "나이키"],
     memo: [],
     todos: [],
@@ -161,6 +164,7 @@ let reports: Array<IReportInfo> = [
     title: "사업 아이디어 선정",
     startTime: moment('2023-09-17').format(),
     endTime: moment('2023-09-20 00:53:22').format(),
+    users: users,
     keywords: ["광고", "레퍼런스", "나이키"],
     memo: [],
     todos: [],
@@ -171,6 +175,7 @@ let reports: Array<IReportInfo> = [
     title: "팀 비전 및 방향성 설정",
     startTime: moment('2023-09-15').format(),
     endTime: moment('2023-09-15 00:40:25').format(),
+    users: users,
     keywords: ["광고", "공동체", "소통"],
     memo: [],
     todos: [],
@@ -181,6 +186,7 @@ let reports: Array<IReportInfo> = [
     title: "자기소개 및 팀명 정하기",
     startTime: moment('2023-09-12').format(),
     endTime: moment('2023-09-12 00:23:22').format(),
+    users: users,
     keywords: ["좋습니다", "어벤져스"],
     memo: [],
     todos: [],
