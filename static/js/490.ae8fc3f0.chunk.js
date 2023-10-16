@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwegrow=self.webpackChunkwegrow||[]).push([[490],{7490:function(e,c,s){e.exports=s.p+"static/media/noticeActive.7fc506fcdbbcd899ceec.svg"}}]);
