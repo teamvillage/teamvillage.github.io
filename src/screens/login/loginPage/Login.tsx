@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import styles from './login.module.scss';
 import { assetType, loadAsset } from '../../../utils/AssetController';
 import { Button, Input } from '../../../components';
+import { useDispatch } from 'react-redux';
+import { User, setUser } from '../../../store/slices/userSlice';
+import userEmoji4 from '../../../assets/images/emojis/female2.svg';
 
 function Login() {
   const [backgroundImage, setBackgroundImage] = useState('');
   const [logoImage, setLogoImage] = useState('');
   const [isStudent, setIsStudent] = useState(true);
+  const dispatch = useDispatch();
   
   useEffect(() => {
     loadAsset('logo_long.png', assetType.image)
@@ -17,8 +20,10 @@ function Login() {
       .then(img => setBackgroundImage(img.default));
   }, []);
 
-  // TODO: login function
   function login(): string {
+    const me = new User("고수희", "asd", "123", userEmoji4);
+    dispatch(setUser(me));
+    
     return isStudent ? '/student' : '/professor';
   }
 

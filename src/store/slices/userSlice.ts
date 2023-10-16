@@ -1,32 +1,37 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// for Dummy
-import emoji from '../../assets/images/emojis/female1.svg';
-
-export interface IUserInfo {
+export class User {
   name: string;
   id: string;
   pw: string;
   emoji: string;
+
+  constructor(name: string, id: string, pw: string, emoji: string) {
+    this.name = name;
+    this.id = id;
+    this.pw = pw;
+    this.emoji = emoji;
+  }
+
+  isEqual(other: User): boolean {
+    return other.name == this.name;
+  }
 }
 
-export interface ICommonState {
-  info: IUserInfo
+interface ICommonState {
+  user: User
 }
 
 const initialState: ICommonState = {
-  // info: []
-
-  // Dummy Data
-  info: { name: "고수희", id: "asd", pw: "123", emoji: emoji }
+  user: new User('', '', '', '')
 }
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: initialState,
   reducers: {
-    setUser(state, action: PayloadAction<IUserInfo>) {
-      state.info = action.payload;
+    setUser(state: ICommonState, action: PayloadAction<User>) {
+      state.user = action.payload;
     }
   }
 })
@@ -34,3 +39,4 @@ export const userSlice = createSlice({
 export const { setUser } = userSlice.actions;
 
 export default userSlice;
+

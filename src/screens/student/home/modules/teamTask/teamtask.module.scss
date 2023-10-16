@@ -1,0 +1,118 @@
+@import '../../../../../assets/theme/index.scss';
+
+.shadow {
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.05));
+}
+
+.teamtask {
+  min-width: 316px;
+  height: 250px;
+  border: 1px solid $JH_K_10;
+  background-color: $JH_K_0;
+  border-radius: 20px;
+  padding: 18px 14px 0 14px;
+  box-sizing: border-box;
+  margin-right: 21px;
+
+  .header {
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-right: 6px;
+      width: 15px;
+      height: 15px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 25px;
+      color: $JH_K_100;
+    }
+  }
+
+  .content {
+    padding-top: 10px;
+    height: 192px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .task {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      padding: 3px 17px 3px 5px;
+      border: 1px solid $JH_K_10;
+      border-radius: 50px;
+
+      .emoji {
+        width: 26px;
+        height: 26px;
+        border-radius: 100%;
+        background-color: $JH_B_POINT_100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 5px;
+      }
+
+      .title {
+        font-weight: 500; 
+        font-size: 15px;
+        line-height: 18px;
+        flex-grow: 1;
+        color: $JH_K_100;
+      }
+
+      .due {
+        width: 31px;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 15px;
+        color: $JH_K_50;
+        margin-right: 7px;
+      }
+
+      .dday {
+        border-radius: 3px;
+        border: 1px solid $JH_K_50;
+        width: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 8px;
+
+        p {
+          font-weight: 500;
+          font-size: 10px;
+          line-height: 15px;
+          color: $JH_K_50;
+        }
+      }
+
+      input {
+        display: none;
+
+        & + label {
+          width: 15px;
+          height: 15px;
+          border-radius: 100%;
+          border: 1px solid $JH_B_MAIN_100;
+        }
+
+        &:checked + label::after {
+          content: '✔';
+          font-size: 10px;
+          width: 15px;
+          height: 15px;
+          margin-left: 4px;
+        }
+      }
+    }
+  }
+}

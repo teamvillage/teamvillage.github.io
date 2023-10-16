@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
 import { Button } from '../../../../../components';
-import { IReportInfo } from '../../../../../store/slices/teamSlice';
+import { ReportInfo } from '../../../../../store/slices/teamSlice';
 import styles from './report.module.scss';
 import arrow from './rightarrow.svg';
 
 interface Props {
-  reports?: Array<IReportInfo>;
+  reports?: Array<ReportInfo>;
 }
 
 export default function Report({reports}:Props) {
@@ -15,7 +14,7 @@ export default function Report({reports}:Props) {
     .sort((a, b) => moment(b.startTime).diff(moment(a.startTime), 'seconds'))
     .slice(0, 4);
 
-  const createCard = (data: IReportInfo) => {
+  const createCard = (data: ReportInfo) => {
     const moment = require('moment');
     const duration = moment(data.endTime).diff(moment(data.startTime), 'seconds')
     const taketimes = moment.utc(duration * 1000).format('HH:mm:ss');
@@ -34,7 +33,7 @@ export default function Report({reports}:Props) {
         <div className={styles.cardContent}>
           <div className={styles.cardEmoji}>
             {data.users.map((user, i) => (
-              <div className={styles.cardEmojiBackground}>
+              <div className={styles.cardEmojiBackground} key={i}>
                 <img src={user.emoji} alt='user' key={i} />
               </div>
             ))}
