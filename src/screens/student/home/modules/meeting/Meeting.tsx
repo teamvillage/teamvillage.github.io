@@ -125,7 +125,7 @@ export default function Meeting({title, meetings}:Props) {
   }, [stream]);
 
   const createMeetingModal = () => (
-    <div className={styles.modal} onClick={() => {setIsModal(false)}}>
+    <div className={styles.modal}>
       <div className={styles.createMeeting}>
         <p className={styles.title}>회의 예약</p>
         <div className={styles.content}>

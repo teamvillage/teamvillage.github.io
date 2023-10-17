@@ -138,7 +138,7 @@ function Signup() {
           <p className={styles.h1}>회원가입이 완료되었습니다!</p>
           <p className={styles.h2}>서비스 이용을 원하신다면 오그린 해주세요.</p>
         </div>
-        <Link to='/login'>
+        <Link to='/'>
           <Button className={styles.okBtn}>
             <p>로그인 화면 돌아가기</p>
           </Button>
