@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkTeamVillage=self.webpackChunkTeamVillage||[]).push([[553],{2553:function(e,a,c){e.exports=c.p+"static/media/Background_login.4a924bf2c8772649e0fe.png"}}]);

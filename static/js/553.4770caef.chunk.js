@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwegrow=self.webpackChunkwegrow||[]).push([[553],{2553:function(e,c,n){e.exports=n.p+"static/media/Background_login.4a924bf2c8772649e0fe.png"}}]);

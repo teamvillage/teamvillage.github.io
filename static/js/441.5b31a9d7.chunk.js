@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkTeamVillage=self.webpackChunkTeamVillage||[]).push([[441],{2441:function(e,a,c){e.exports=c.p+"static/media/clock_icon.d99d414221bd5b893d06.svg"}}]);

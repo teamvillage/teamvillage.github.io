@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwegrow=self.webpackChunkwegrow||[]).push([[620],{9620:function(e,s,a){e.exports=a.p+"static/media/call.51592fca35f30ae2059f.svg"}}]);
