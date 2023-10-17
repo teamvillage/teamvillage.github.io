@@ -1,12 +1,15 @@
 import styles from './tanagement.module.scss';
 import { loadAsset, assetType } from '../../../../../utils/AssetController';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '../../../../../components';
 
 import tempImg from '../../../../../assets/images/temp_screenshot.png';
-import { Link, useNavigate } from 'react-router-dom';
 
-function Tanagement() {
+interface Prop {
+  onComplete: () => any;
+}
+
+function Tanagement({onComplete}: Prop) {
   const [logoIcon, setLogoIcon] = useState('');
   const [searchIcon, setSearchIcon] = useState('');
   const [checkIcon, setCheckIcon] = useState('');
@@ -14,7 +17,24 @@ function Tanagement() {
   const [checkBlackIcon, setCheckBlackIcon] = useState('');
   const [clockIcon, setClockIcon] = useState('');
   const [homeIcon, setHomeIcon] = useState('');
-  const navigate = useNavigate();
+  const [timer, setTimer] = useState(-1);
+  const [isMounted, setIsMounted] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout>();
+
+  useEffect(() => {
+    if (timer == 0) {
+      submitQuestion();
+      setTimer(25);
+      return;
+    }
+    
+    timerRef.current = setTimeout(() => {
+      setTimer(timer - 1);
+    }, 1000);
+
+    if (!isMounted)
+      clearTimeout(timerRef.current);
+  }, [timer]);
 
   useEffect(() => {
     loadAsset('tanagement_home_icon.png', assetType.image)
@@ -35,7 +55,6 @@ function Tanagement() {
 
   const [currentPage, setCurrentPage] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [timer, setTimer] = useState(25);
   const problemList = [
     ["나는 다른 사람의\n감정이 느껴진다", "나는 다른 사람의\n성장 가능성이 보인다"],
     ["완벽하지 않더라도\n일을 성실하게 하는 것이\n중요하다.", "늦더라도 완벽하게\n일을 끝내는 것이\n중요하다."],
@@ -104,13 +123,14 @@ function Tanagement() {
           </div>
         </div>
       </div>
-      <Button className={styles.startTest} onClick={() => {setCurrentPage(2);}}>
+      <Button className={styles.startTest} onClick={() => {setIsMounted(true); setTimer(25); setCurrentPage(2);}}>
         <p>시작하기</p>
       </Button>
     </div>
   )
 
   const submitQuestion = () => {
+    clearTimeout(timerRef.current);
     setTimeout(() => {
       document.getElementsByName('check').forEach(elem => {
         (elem as HTMLInputElement).checked = false;
@@ -131,7 +151,7 @@ function Tanagement() {
         <p>Q{currentQuestion + 1}. 문항을 읽고 5개의 척도 중 가장 가까운 것을 선택하세요</p>
         <div className={styles.timer}>
           <img src={clockIcon} alt='timer' />
-          <p>{timer} (폰트)</p>
+          <p>{timer}</p>
         </div>
       </div>
       <div className={styles.questions}>
@@ -197,7 +217,7 @@ function Tanagement() {
 
   const checkOk = () => {
     localStorage.setItem('tanagement', 'ok');
-    navigate(0);
+    onComplete();
   }
   const result = (
     <div className={styles.result}>

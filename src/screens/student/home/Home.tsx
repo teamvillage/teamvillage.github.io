@@ -20,6 +20,7 @@ import { RootState } from '../../../store';
 function Home() {
   const [currentTeam, setCurrentTeam] = useState<TeamInfo>();
   const tanagement_log = localStorage.getItem('tanagement');
+  const [tanagement, setTanagement] = useState(tanagement_log);
   const dispatch = useDispatch();
   const me = useSelector((state:RootState) => state.user.user);
   const moment = require('moment');
@@ -163,7 +164,7 @@ function Home() {
   return (
     <Base onSelectTeam={(team: TeamInfo) => {setCurrentTeam(team);}}
           onAddTeam={() => {createDummyData();}}>
-      {(tanagement_log === null) ? <Tanagement /> : 
+      {(tanagement === null) ? <Tanagement onComplete={() => {setTanagement('ok');}}/> : 
       <div className={styles.container}>
         <div className={styles.top}>
           <div className={styles.meeting}>
