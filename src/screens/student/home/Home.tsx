@@ -16,6 +16,7 @@ import userEmoji2 from '../../../assets/images/emojis/male2.svg';
 import userEmoji3 from '../../../assets/images/emojis/female1.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
+import AddTeam from './modules/addTeam/AddTeam';
 
 function Home() {
   const [currentTeam, setCurrentTeam] = useState<TeamInfo>();
@@ -24,6 +25,7 @@ function Home() {
   const dispatch = useDispatch();
   const me = useSelector((state:RootState) => state.user.user);
   const moment = require('moment');
+  const teamList = useSelector((state: RootState) => state.team.teamList);
 
   const createDummyData = () => {
     const users: Array<User> = [
@@ -161,36 +163,42 @@ function Home() {
     });
   }
 
+  const content = (
+    <div>
+      <div className={styles.top}>
+        <div className={styles.meeting}>
+          <Meeting 
+            title="회의 with AI"
+            meetings={currentTeam?.reports} />
+        </div>
+        <div className={styles.report}>
+          <Report 
+            reports={currentTeam?.reports} />
+        </div>
+      </div>
+      <div className={styles.bottom}>
+        <div className={styles.teamTask}>
+          <TeamTask 
+            teamInfo={currentTeam} />
+        </div>
+        <div className={styles.myTask}>
+          <MyTask 
+            teamInfo={currentTeam} />
+        </div>
+        <div className={styles.achievement}>
+          <Achievement
+            teamInfo={currentTeam} />
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <Base onSelectTeam={(team: TeamInfo) => {setCurrentTeam(team);}}
           onAddTeam={() => {createDummyData();}}>
       {(tanagement === null) ? <Tanagement onComplete={() => {setTanagement('ok');}}/> : 
       <div className={styles.container}>
-        <div className={styles.top}>
-          <div className={styles.meeting}>
-            <Meeting 
-              title="회의 with AI"
-              meetings={currentTeam?.reports} />
-          </div>
-          <div className={styles.report}>
-            <Report 
-              reports={currentTeam?.reports} />
-          </div>
-        </div>
-        <div className={styles.bottom}>
-          <div className={styles.teamTask}>
-            <TeamTask 
-              teamInfo={currentTeam} />
-          </div>
-          <div className={styles.myTask}>
-            <MyTask 
-              teamInfo={currentTeam} />
-          </div>
-          <div className={styles.achievement}>
-            <Achievement
-              teamInfo={currentTeam} />
-          </div>
-        </div>
+        { teamList.length == 0 ? <AddTeam onComplete={(team: TeamInfo) => {createTeam(team);}}/> : content }
       </div>
       }
     </Base>

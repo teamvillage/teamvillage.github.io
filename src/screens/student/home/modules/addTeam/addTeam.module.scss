@@ -1,0 +1,158 @@
+@import '../../../../../assets/theme/index.scss';
+
+.addTeam {
+  margin: 0 30px;
+  border: 1px solid $JH_K_10;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  height: 667px;
+  border-radius: 15px;
+  padding: 139px 0 184px 0;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .title {
+    font-size: 20px;
+    line-height: 27px;
+    color: $JH_K_100;
+    text-align: center;
+  }
+
+  .content {
+    height: 299px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &.introduction {
+      padding-top: 114px;
+      justify-content: space-between;
+      
+      p {
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 18px;
+        text-align: center;
+      }
+    }
+
+    &.code, &.setTitle {
+      padding-top: 73px;
+
+      p {
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 18px;
+        color: $JH_K_100;
+      }
+
+      .inputDiv { 
+        width: 450px;
+        margin-top: 29px;
+        margin-bottom: 53px;
+        padding-left: 84px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        input {
+          width: 363px;
+          height: 30px;
+          padding: 6px 9px;
+          border-radius: 5px;
+          border: 1px solid $JH_K_10;
+          box-sizing: border-box;
+          box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+          color: $JH_K_100;
+
+          &::placeholder {
+            font-weight: 500;
+            font-size: 15px;
+            color: $JH_K_50;
+          }
+
+          &.active {
+            background-color: $SUB_20;
+            outline-color: $JH_B_MAIN_50;
+            padding-right: 39px;
+            box-sizing: border-box;
+            
+            & + img {
+              width: 21px;
+              height: 21px;
+              margin-left: -30px;
+              margin-right: 27px;
+            }
+
+            & ~ p {
+              font-weight: 700;
+              font-size: 15px;
+              line-height: 18px;
+            }
+          }
+        }
+      }
+
+      .emojiDiv {
+        display: flex;
+        align-items: center;
+        height: 60px;
+
+        p {
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 27px;
+          color: $JH_K_100;
+        }
+
+        .emoji {
+          img {
+            height: 55px;
+          }
+        }
+      }
+    }
+
+    &.setTitle {
+      .emoji {
+        display: flex;
+        align-items: center;
+
+        & > div {
+          position: relative;
+
+          img:last-of-type {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 15px;
+            width: 15px;
+          }
+        }
+      }
+    }
+  }
+
+  .btn {
+    width: 275px;
+    height: 34px;
+    margin-top: 17px;
+    border-radius: 5px;
+    background-color: $JH_B_MAIN_100;
+
+    p {
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 18px;
+      color: $JH_K_0;
+      margin-right: 20px;
+      margin: 0;
+    }
+  }
+}
