@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkTeamVillage=self.webpackChunkTeamVillage||[]).push([[620],{9620:function(a,e,l){a.exports=l.p+"static/media/call.2d8901a5fc622a609f4a.svg"}}]);

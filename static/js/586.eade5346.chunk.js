@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkTeamVillage=self.webpackChunkTeamVillage||[]).push([[586],{2586:function(e,a,s){e.exports=s.p+"static/media/male2.50decef85de0ac870a35.svg"}}]);

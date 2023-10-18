@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkTeamVillage=self.webpackChunkTeamVillage||[]).push([[490],{7490:function(e,c,a){e.exports=a.p+"static/media/noticeActive.51d8e0c915c91c08c21c.svg"}}]);
