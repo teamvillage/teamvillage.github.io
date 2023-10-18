@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styles from './meeting.module.scss';
 import { assetType, loadAsset } from '../../../../../utils/AssetController';
 import { Button } from '../../../../../components';
-import { ReportInfo, TodoInfo, endMeeting, startMeeting } from '../../../../../store/slices/teamSlice';
+import { ReportInfo, TeamInfo, TodoInfo, addReport, endMeeting, startMeeting } from '../../../../../store/slices/teamSlice';
 import Base from '../../../base/Base';
 import recordImg1 from './recordImg1.png';
 import recordImg2 from './recordImg2.png';
@@ -19,13 +19,20 @@ import micOn from './mic_on.png';
 import settingIcon from './settingIcon.png';
 import arrowlb from './arrow_lb.png';
 import cameraIcon from './cameraIcon.png';
+import { RootState } from '../../../../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { User } from '../../../../../store/slices/userSlice';
+import userEmoji1 from '../../../../../assets/images/emojis/male1.svg';
+import userEmoji2 from '../../../../../assets/images/emojis/male2.svg';
+import userEmoji3 from '../../../../../assets/images/emojis/female1.svg';
 
 interface Props {
   title: string;
   meetings?: Array<ReportInfo>;
+  team?: TeamInfo;
 }
 
-export default function Meeting({title, meetings}:Props) {
+export default function Meeting({title, meetings, team}:Props) {
   const moment = require('moment');
 
   const [cloverIcon, setCloverIcon] = useState('');
@@ -41,27 +48,30 @@ export default function Meeting({title, meetings}:Props) {
   const [showMeetingPage, setShowMeetingPage] = useState(true);
   const [countTimer, setCountTimer] = useState(0);
   const timerRef = useRef<NodeJS.Timer>();
+  const me = useSelector((state:RootState) => state.user.user);
+  const users: Array<User> = [
+    new User("이상협", "asd", "asd", userEmoji1),
+    new User("나상호", "asd", "asd", userEmoji2),
+    new User("김새은", "asd", "asd", userEmoji3)
+  ];
+  const teamList = useSelector((state: RootState) => state.team.teamList);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     loadAsset('clover_icon.svg', assetType.image)
       .then(img => setCloverIcon(img.default));
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let sortedMeets = meetings
     ?.filter(meet => {
-      if (meet.isEnd)
-        return false;
-      return moment(meet.endTime).diff(moment(), 'seconds') < 0
+      return !meet.isEnd;
     }).sort((a, b) => moment(a.startTime).diff(moment(b.startTime), 'seconds'));
     
     if (sortedMeets !== undefined && sortedMeets.length > 0)
       setRecentMeetings(sortedMeets);
-    else {
-      setIsMeetExist(false);
-      setIsMeeting(false);
+    else
       setRecentMeetings([]);
-    }
   }, [meetings]);
 
   const countdown = () => {
@@ -83,11 +93,15 @@ export default function Meeting({title, meetings}:Props) {
     }
   }, [isMeeting, countTimer]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (recentMeetings.length > 0) {
       setIsMeetExist(true);
       if (recentMeetings[0].isStart && !recentMeetings[0].isEnd)
         setIsMeeting(true);
+    }
+    else {
+      setIsMeetExist(false);
+      setIsMeeting(false);
     }
   }, [recentMeetings]);
 
@@ -124,23 +138,47 @@ export default function Meeting({title, meetings}:Props) {
       videoRef.current.srcObject = stream;
   }, [stream]);
 
+  const inputRefs = useRef<Array<HTMLInputElement|null>>([]);
+  const [meetTitle, setMeetTitle] = useState('');
+  const [meetDate, setMeetDate] = useState('');
+  const [meetStartTime, setMeetStartTime] = useState('');
+  const [meetEndTime, setMeetEndTime] = useState('');
   const createMeetingModal = () => (
     <div className={styles.modal}>
       <div className={styles.createMeeting}>
         <p className={styles.title}>회의 예약</p>
         <div className={styles.content}>
           <label>회의명</label>
-          <input className={styles.name} type='text' placeholder='회의명을 입력하세요.' />
+          <input 
+            className={styles.name} 
+            type='text' 
+            placeholder='회의명을 입력하세요.'
+            onChange={e => setMeetTitle(e.target.value)}
+            ref = {e => inputRefs.current[0] = e}
+            />
           <label>날짜</label>
-          <input className={styles.date} type='text' placeholder='2023.09.25' />
+          <input 
+            className={styles.date} 
+            type='text' 
+            placeholder='2023.09.25'
+            onChange={e => setMeetDate(e.target.value)}
+            ref = {e => inputRefs.current[1] = e} />
           <label>시간</label>
           <div className={styles.inputTime}>
             <div className={`${styles.time} ${styles.start}`}>
-              <input type='text' placeholder='1:00' />
+              <input 
+                type='text' 
+                placeholder='1:00'
+                onChange={e => setMeetStartTime(e.target.value)}
+                ref = {e => inputRefs.current[2] = e} />
               <Button className={styles.timeBtn}><p>PM</p></Button>
             </div>
             <div className={`${styles.time} ${styles.end}`}>
-              <input type='text' placeholder='2:00' />
+              <input 
+                type='text' 
+                placeholder='2:00'
+                onChange={e => setMeetEndTime(e.target.value)}
+                ref = {e => inputRefs.current[3] = e} />
               <Button className={styles.timeBtn}><p>PM</p></Button>
             </div>
           </div>
@@ -153,7 +191,47 @@ export default function Meeting({title, meetings}:Props) {
             <p>취소</p>
           </Button>
           <Button className={`${styles.btn} ${styles.reserve}`}
-          onClick={() => {setIsModal(false);}}>
+          onClick={() => {
+            if (meetTitle != '' && meetDate != '' &&
+                meetStartTime != '' && meetEndTime != '') {
+              const newReport = new ReportInfo({
+                title: meetTitle,
+                users: [me, ...users],
+                startTime: moment(meetDate + ' ' + meetStartTime, 'YYYY.MM.DD HH:mm').format(),
+                endTime: moment(meetDate + ' ' + meetEndTime, 'YYYY.MM.DD HH:mm').format()
+              });
+              if (team) {
+                setMeetTitle('');
+                setMeetDate('');
+                setMeetStartTime('');
+                setMeetEndTime('');
+                inputRefs.current.map(e => e!.value = '');
+                // let meets = meetings?.slice();
+                // meets?.push(newReport);
+                // meetings = meets;
+                // dispatch(addReport([team, newReport]));
+              }
+              setIsModal(false);
+            }
+            else {
+              if (meetTitle == '') {
+                setMeetTitle('나이키 SWOT 분석');
+                inputRefs.current[0]!.value = '나이키 SWOT 분석';
+              }
+              if (meetDate == '') {
+                setMeetDate('2023.10.30');
+                inputRefs.current[1]!.value = '2023.09.30';
+              }
+              if (meetStartTime == '') {
+                setMeetStartTime('1:00');
+                inputRefs.current[2]!.value = '1:00';
+              }
+              if (meetEndTime == '') {
+                setMeetEndTime('2:00');
+                inputRefs.current[3]!.value = '2:00';
+              }
+            }
+          }}>
             <p>예약</p>
           </Button>
         </div>
@@ -320,9 +398,9 @@ export default function Meeting({title, meetings}:Props) {
           stream?.getTracks().forEach(e => e.stop());
           setStream(null);
           isMounted.current = false;
-          endMeeting(recentMeetings[0]);
           setIsMeeting(false);
           setRecentMeetings(recentMeetings.slice(1));
+          dispatch(endMeeting(recentMeetings[0]));
         }}>
           <p>회의 끝내기</p>
         </Button>
@@ -340,7 +418,7 @@ export default function Meeting({title, meetings}:Props) {
           </div>
           <div className={styles.content}>
             <div className={styles.log}>
-              {isMeetExist &&
+              {(isMeetExist && recentMeetings.length > 0) &&
               <div className={styles.logContent}>
                 <div className={styles.logBar}>
                   <div className={`${styles.logIcon} ${styles.active}`}></div>
@@ -380,7 +458,7 @@ export default function Meeting({title, meetings}:Props) {
                   }
                 }}>
                 <p>{isMeeting ? "회의중" : "시작하기"}</p>
-                {isMeeting && 
+                {(isMeeting && recentMeetings.length > 0) && 
                 <p>+
                   {moment.utc(
                     moment(recentMeetings[0].startTime)

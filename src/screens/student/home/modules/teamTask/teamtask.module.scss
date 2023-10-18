@@ -50,6 +50,36 @@
       border: 1px solid $JH_K_10;
       border-radius: 50px;
 
+      &.clear {
+        background-color: $JH_B_MAIN_100 !important;
+
+        .title {
+          color: $JH_K_0;
+        }
+
+        .due {
+          color: $JH_K_0;
+        }
+
+        .dday {
+          border: 1px solid $JH_K_0;
+
+          p {
+            color: $JH_K_0;
+          }
+        }
+
+        input {
+          & + label {
+            border: 1px solid $JH_K_0;
+          }
+
+          &:checked + label::after {
+            color: $JH_K_0;
+          }
+        }
+      }
+
       .emoji {
         width: 26px;
         height: 26px;
@@ -103,14 +133,13 @@
           height: 15px;
           border-radius: 100%;
           border: 1px solid $JH_B_MAIN_100;
+          display: flex;
         }
 
         &:checked + label::after {
-          content: '✔';
-          font-size: 10px;
-          width: 15px;
-          height: 15px;
+          content: url('./checkV.png');
           margin-left: 4px;
+          line-height: 11px;
         }
       }
     }

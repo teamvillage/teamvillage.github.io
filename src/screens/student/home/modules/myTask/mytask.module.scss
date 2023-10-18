@@ -136,14 +136,13 @@
           height: 15px;
           border-radius: 100%;
           border: 1px solid $JH_B_MAIN_100;
+          display: flex;
         }
 
         &:checked + label::after {
-          content: '✔';
-          font-size: 10px;
-          width: 15px;
-          height: 15px;
+          content: url('./checkV.png');
           margin-left: 4px;
+          line-height: 11px;
         }
       }
     }

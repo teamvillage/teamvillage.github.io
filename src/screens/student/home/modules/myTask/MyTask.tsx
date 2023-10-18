@@ -1,9 +1,10 @@
 import styles from './mytask.module.scss';
 import { TeamInfo, updateTodo } from '../../../../../store/slices/teamSlice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../store';
 import mytaskIcon from './mytaskIcon.png';
 import mytaskClearIcon from './mytaskClearIcon.png';
+import { useRef } from 'react';
 
 interface Props {
   teamInfo: TeamInfo | undefined;
@@ -12,6 +13,8 @@ interface Props {
 export default function MyTask({teamInfo}: Props) {
   const moment = require('moment');
   const me = useSelector((state: RootState) => state.user.user);
+  const inputRef = useRef<Array<HTMLInputElement|null>>([]);
+  const dispatch = useDispatch();
   const myTasks = teamInfo?.reports.map(report => 
     report.todos.filter(todo => todo.user.isEqual(me)))
     .flat()
@@ -31,29 +34,33 @@ export default function MyTask({teamInfo}: Props) {
       <div className={styles.mytask}>
         <div className={styles.header}>
           <img src={mytaskIcon} alt='logo' />
-          <p>팀 태스크</p>
+          <p>나의 태스크</p>
         </div>
         <div className={styles.content}>
-          {myTasks?.map((e, i) => {
-            let dday = moment().diff(moment(e?.due), 'days');
+          {myTasks?.map((task, i) => {
+            let dday = moment().diff(moment(task?.due), 'days');
             if (dday > 0)
               dday = '+' + dday;
 
             return (
               <div className={`${styles.task} 
-                              ${e.importance < 0 ? styles.import : ''}
-                              ${e.state ? styles.clear : ''}`} key={i}>
+                              ${task.importance < 0 ? styles.import : ''}
+                              ${task.state ? styles.clear : ''}`} key={i}>
                 <div className={styles.emoji}>
-                  <img src={e.state ? mytaskClearIcon : mytaskIcon} alt='user'/>
+                  <img src={task.state ? mytaskClearIcon : mytaskIcon} alt='user'/>
                 </div>
-                <p className={styles.title}>{e.title}</p>
-                <p className={styles.due}>{moment(e.due).format('MM.DD')}</p>
+                <p className={styles.title}>{task.title}</p>
+                <p className={styles.due}>{moment(task.due).format('MM.DD')}</p>
                 <div className={styles.dday}>
                   <p>D{dday}</p>
                 </div>
                 <input
                   type='checkbox' 
-                  id={'mytaskCheckbox' + i} />
+                  id={'mytaskCheckbox' + i}
+                  onChange={({target: {checked}}) => {
+                    dispatch(updateTodo([teamInfo, task, checked]))
+                  }}
+                  checked={task.state} />
                 <label htmlFor={'mytaskCheckbox' + i} />
               </div>
             )

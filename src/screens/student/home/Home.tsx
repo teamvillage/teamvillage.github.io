@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import Base from '../base/Base';
 import styles from './home.module.scss';
 
@@ -9,8 +9,8 @@ import TeamTask from './modules/teamTask/TeamTask';
 import MyTask from './modules/myTask/MyTask';
 import Achievement from './modules/achievement/Achievement';
 
-import { User, setUser } from '../../../store/slices/userSlice';
-import { ReportInfo, TeamInfo, TodoInfo, clearAll, createTeam } from '../../../store/slices/teamSlice';
+import { User } from '../../../store/slices/userSlice';
+import { ReportInfo, TeamInfo, TodoInfo, createTeam } from '../../../store/slices/teamSlice';
 import userEmoji1 from '../../../assets/images/emojis/male1.svg';
 import userEmoji2 from '../../../assets/images/emojis/male2.svg';
 import userEmoji3 from '../../../assets/images/emojis/female1.svg';
@@ -26,6 +26,11 @@ function Home() {
   const me = useSelector((state:RootState) => state.user.user);
   const moment = require('moment');
   const teamList = useSelector((state: RootState) => state.team.teamList);
+
+  useLayoutEffect(() => {
+    if (teamList.length == 1)
+      setCurrentTeam(teamList[0]);    
+  }, [teamList])
 
   const createDummyData = () => {
     const users: Array<User> = [
@@ -169,7 +174,8 @@ function Home() {
         <div className={styles.meeting}>
           <Meeting 
             title="회의 with AI"
-            meetings={currentTeam?.reports} />
+            meetings={currentTeam?.reports}
+            team={currentTeam} />
         </div>
         <div className={styles.report}>
           <Report 
@@ -196,9 +202,19 @@ function Home() {
   return (
     <Base onSelectTeam={(team: TeamInfo) => {setCurrentTeam(team);}}
           onAddTeam={() => {createDummyData();}}>
-      {(tanagement === null) ? <Tanagement onComplete={() => {setTanagement('ok');}}/> : 
+      {(tanagement === null) ? 
+      <Tanagement onComplete={() => {
+        localStorage.setItem('tanagement', 'ok');
+        setTanagement('ok');
+      }}/> 
+      : 
       <div className={styles.container}>
-        { teamList.length == 0 ? <AddTeam onComplete={(team: TeamInfo) => {createTeam(team);}}/> : content }
+        { teamList.length === 0 ? 
+        <AddTeam onComplete={(team: TeamInfo) => {
+          dispatch(createTeam(team));
+        }}/> 
+        : 
+        content }
       </div>
       }
     </Base>

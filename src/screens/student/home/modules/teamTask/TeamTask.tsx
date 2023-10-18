@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { TeamInfo, updateTodo } from '../../../../../store/slices/teamSlice';
 import styles from './teamtask.module.scss';
 import teamTaskIcon from './teamTaskIcon.png';
@@ -18,6 +18,7 @@ export default function TeamTask({teamInfo}: Props) {
     .flat()
     .sort((a, b) => moment(a?.due).diff(moment(b?.due)));
   const checkboxRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const dispatch = useDispatch();
 
   return (
     <div className={styles.shadow}>
@@ -33,7 +34,9 @@ export default function TeamTask({teamInfo}: Props) {
               dday = '+' + dday;
 
             return (
-              <div className={styles.task} key={i}>
+              <div className={`${styles.task} 
+                ${e.importance < 0 ? styles.import : ''}
+                ${e.state ? styles.clear : ''}`} key={i}>
                 <div className={styles.emoji}>
                   <img src={e.user.emoji} alt='user'/>
                 </div>
@@ -45,7 +48,11 @@ export default function TeamTask({teamInfo}: Props) {
                 <input 
                   type='checkbox' 
                   id={'teamtaskCheckbox' + i} 
-                  ref={e => checkboxRefs.current[i] = e} />
+                  ref={e => checkboxRefs.current[i] = e}
+                  onChange={({target: {checked}}) => {
+                    dispatch(updateTodo([teamInfo, e, checked]))
+                  }}
+                  checked={e.state} />
                   <label htmlFor={'teamtaskCheckbox' + i} />
               </div>
             )

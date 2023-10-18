@@ -216,7 +216,6 @@ function Tanagement({onComplete}: Prop) {
   )
 
   const checkOk = () => {
-    localStorage.setItem('tanagement', 'ok');
     onComplete();
   }
   const result = (

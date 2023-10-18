@@ -32,6 +32,11 @@ export class TodoInfo {
     this.importance = importance;
     this.state = state;
   }
+
+  isSame(other?: TodoInfo): boolean {
+    return this.title == other?.title &&
+           this.user == other.user;
+  }
 }
 
 interface Report {
@@ -85,6 +90,12 @@ export class ReportInfo {
     this.isStart = isStart;
     this.isEnd = isEnd;
   }
+
+  isSame(other?: Report): boolean {
+    return this.title == other?.title &&
+           this.startTime == other.startTime &&
+           this.endTime == other.endTime;
+  }
 }
 
 interface Team {
@@ -102,6 +113,10 @@ export class TeamInfo {
     this.users = users;
     this.reports = reports;
   }
+
+  isSame(other?: TeamInfo): boolean {
+    return this.name == other?.name;
+  }
 }
 
 interface ICommonState {
@@ -117,24 +132,44 @@ export const teamSlice = createSlice({
   initialState: initialState,
   reducers: {
     createTeam(state: ICommonState, action: PayloadAction<TeamInfo>) {
-      state.teamList.push(action.payload);
+      if (state.teamList.length < 4) {
+        let teams = state.teamList.slice();
+        teams.push(action.payload);
+        state.teamList = teams;
+      }
     },
     addReport(state: ICommonState, action: PayloadAction<[TeamInfo, ReportInfo]>) {
-      let team = state.teamList.find(team => team.name === action.payload[0].name);
-      team?.reports.push(action.payload[1]);
+      let idx = state.teamList.findIndex(team => team.isSame(action.payload[0]));
+      if (idx > -1) {
+        let reports = state.teamList[idx].reports.slice();
+        reports.push(action.payload[1]);
+        let teams = state.teamList.slice();
+        teams[idx].reports = reports;
+        state.teamList = teams;
+      }
     },
-    updateTodo(state: ICommonState, action: PayloadAction<[TeamInfo, TodoInfo, boolean]>) {
-      let team = state.teamList.find(team => team.name === action.payload[0].name);
-      console.log(team);
-      team?.reports.forEach(report => {
-        let todo = report.todos?.find(todo => todo.title === action.payload[1].title);
-        if (todo)
-          todo.state = action.payload[2];
-      });
+    updateTodo(state: ICommonState, action: PayloadAction<[TeamInfo|undefined, TodoInfo, boolean]>) {
+      if (action.payload[0] != undefined) {
+        let teamIdx = state.teamList.findIndex(team => team.isSame(action.payload[0]));
+        if (teamIdx > -1) {
+          let todoIdx = -1;
+          state.teamList[teamIdx].reports.some((report, reportIdx) => {
+            todoIdx = report.todos.findIndex(todo => todo.isSame(action.payload[1]))
+  
+            if (todoIdx > -1) {
+              let teams = state.teamList.slice();
+              teams[teamIdx].reports[reportIdx].todos[todoIdx].state = action.payload[2];
+              state.teamList = teams;
+              return true;
+            }
+          })
+        }
+      }
     },
     startMeeting(state: ICommonState, action: PayloadAction<ReportInfo>) {
       const moment = require('moment');
-      state.teamList.some(team => 
+      let teams = state.teamList;
+      teams.some(team => 
         team.reports.some(e => {
           if (e.title == action.payload.title) {
             e.isStart = true;
@@ -143,10 +178,12 @@ export const teamSlice = createSlice({
           }
         })
       );
+      state.teamList = teams;
     },
     endMeeting(state: ICommonState, action: PayloadAction<ReportInfo>) {
       const moment = require('moment');
-      state.teamList.some(team => 
+      let teams = state.teamList;
+      teams.some(team => 
         team.reports.some(e => {
           if (e.title == action.payload.title) {
             e.isEnd = true;
@@ -155,6 +192,7 @@ export const teamSlice = createSlice({
           }
         })
       );
+      state.teamList = teams;
     },
     clearAll(state: ICommonState) {
       state.teamList = [];

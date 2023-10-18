@@ -13,6 +13,7 @@ import userEmoji1 from '../../../../../assets/images/emojis/male1.svg';
 import userEmoji2 from '../../../../../assets/images/emojis/male2.svg';
 import userEmoji3 from '../../../../../assets/images/emojis/female1.svg';
 import userEmoji4 from '../../../../../assets/images/emojis/female2.svg';
+import { User } from '../../../../../store/slices/userSlice';
 
 interface Prop {
   onComplete: (team: TeamInfo) => any;
@@ -23,17 +24,31 @@ export default function AddTeam({onComplete}: Prop) {
   const [codeNumber, setCodeNumber] = useState('');
   const [teamTitle, setTeamTitle] = useState('');
   const inputRef = useRef<HTMLInputElement|null>(null);
+  const me = useSelector((state:RootState) => state.user.user);
 
-  const newTeam: TeamInfo = {
+  const newTeam: TeamInfo = new TeamInfo({
     name: '',
     users: [],
     reports: []
-  }
-  const nextPage = () => {
-    if (currentPage == pages.length - 1)
-      onComplete(newTeam);
-    else
-      setCurrentPage(currentPage + 1);
+  })
+  const nextPage = (prev?: boolean) => {
+    if (prev)
+      setCurrentPage(currentPage - 1);
+    else {
+      if (currentPage == pages.length - 1) {
+        const users: Array<User> = [
+          new User("이상협", "asd", "asd", userEmoji1),
+          new User("나상호", "asd", "asd", userEmoji2),
+          new User("김새은", "asd", "asd", userEmoji3)
+        ];
+
+        newTeam.name = '광 | ' + teamTitle;
+        newTeam.users = [me, ...users];
+        onComplete(newTeam);
+      }
+      else
+        setCurrentPage(currentPage + 1);
+    }
   }
   
   const introduction = (
@@ -45,7 +60,7 @@ export default function AddTeam({onComplete}: Prop) {
         <p>팀빌리지에서 회의를 진행하기 위해서는 프로젝트 그룹을 추가해야 합니다.</p>
         <p>아래 버튼을 누르고, 안내에 따라 그룹을 추가해주세요.</p>
       </div>
-      <Button className={styles.btn} onClick={nextPage}>
+      <Button className={styles.btn} onClick={() => {nextPage()}}>
         <p>프로젝트 시작하기</p>
       </Button>
     </div>
@@ -85,6 +100,10 @@ export default function AddTeam({onComplete}: Prop) {
           nextPage();
           inputRef.current!.value = '';
         }
+        else {
+          inputRef.current!.value = 'GMP30002';
+          setCodeNumber('GMP30002');
+        }
       }}>
         <p>다음</p>
       </Button>
@@ -92,13 +111,13 @@ export default function AddTeam({onComplete}: Prop) {
   )
 
   const peopleOkRef = useRef<Array<HTMLImageElement|null>>([]);
-  const handleOk = () => {
-    if (teamTitle.length > 2) {
+  const handleOk = (control: boolean) => {
+    if (teamTitle.length > 2 || control) {
       peopleOkRef.current.map((e, i) => {
         if (i == 0) return;
         if (e)
           setTimeout(() => e.src = checkOk, 
-            2000 + (Math.random() - 0.5) * 2000);
+            1000 + (Math.random() - 0.5) * 1000);
       });
     }
     else if (teamTitle.length < 3) {
@@ -119,7 +138,7 @@ export default function AddTeam({onComplete}: Prop) {
             className={teamTitle.length > 2 ? styles.active : ''} 
             type='text' 
             placeholder='어벤져스' 
-            onChange={e => {setTeamTitle(e.target.value); handleOk();}}
+            onChange={e => {setTeamTitle(e.target.value); handleOk(false);}}
             ref={e => inputRef.current = e} />
           {teamTitle.length > 2 && <img src={checkOk} alt='ok' />}
         </div>
@@ -145,19 +164,56 @@ export default function AddTeam({onComplete}: Prop) {
           </div>
         </div>
       </div>
-      <Button className={styles.btn} onClick={() => {
-        if (codeNumber.length == 8)
-          nextPage();
-      }}>
-        <p>다음</p>
-      </Button>
+      <div className={styles.btns}>
+        <Button className={styles.btn} onClick={() => {
+          inputRef.current!.value = codeNumber;
+          nextPage(true);
+        }}>
+          <p>이전</p>
+        </Button>
+        <Button className={styles.btn} onClick={() => {
+          if (teamTitle.length > 2)
+            nextPage();
+          else {
+            inputRef.current!.value = '어벤져스';
+            setTeamTitle('어벤져스');
+            handleOk(true);
+          }
+        }}>
+          <p>다음</p>
+        </Button>
+      </div>
+    </div>
+  )
+
+  const complete = (
+    <div>
+      <div className={`${styles.title} ${styles.complete}`}>
+        <div>
+          <div><p>광고와 사회</p></div>
+          <div><p>{teamTitle}</p></div>
+        </div>
+        <p>프로젝트 그룹 생성 완료</p>
+      </div>
+      <div className={`${styles.content}`}>
+        <p>그룹 달성도를 설정하세요.</p>
+      </div>
+      <div className={styles.btns}>
+        <Button className={styles.btn} onClick={() => {nextPage();}} >
+          <p>다음에 하기</p>
+        </Button>
+        <Button className={styles.btn} onClick={() => {nextPage()}}>
+          <p>설정하기</p>
+        </Button>
+      </div>
     </div>
   )
 
   const pages = [
     introduction,
     code,
-    setTitle
+    setTitle,
+    complete
   ]
 
   return (
