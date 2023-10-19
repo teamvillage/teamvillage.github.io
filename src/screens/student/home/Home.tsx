@@ -9,7 +9,7 @@ import TeamTask from './modules/teamTask/TeamTask';
 import MyTask from './modules/myTask/MyTask';
 import Achievement from './modules/achievement/Achievement';
 
-import { User } from '../../../store/slices/userSlice';
+import { defaultUsers, User } from '../../../store/slices/userSlice';
 import { ReportInfo, TeamInfo, TodoInfo, createTeam } from '../../../store/slices/teamSlice';
 import userEmoji1 from '../../../assets/images/emojis/male1.svg';
 import userEmoji2 from '../../../assets/images/emojis/male2.svg';
@@ -33,11 +33,7 @@ function Home() {
   }, [teamList])
 
   const createDummyData = () => {
-    const users: Array<User> = [
-      new User("이상협", "asd", "asd", userEmoji1),
-      new User("나상호", "asd", "asd", userEmoji2),
-      new User("김새은", "asd", "asd", userEmoji3)
-    ];
+    const users: Array<User> = defaultUsers.slice(1, 4);
     
     const todos: Array<TodoInfo> = [
       new TodoInfo({

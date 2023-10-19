@@ -1,6 +1,7 @@
 import { 
   ErrorPage, 
   Login,
+  ProfessorHome,
   Signup,
   StudentHome,
 } from './screens';
@@ -20,6 +21,10 @@ function App() {
     {
       path: '/student',
       element: <StudentHome />
+    },
+    {
+      path: '/professor',
+      element: <ProfessorHome />
     }
   ]);
 

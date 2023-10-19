@@ -13,7 +13,7 @@ import userEmoji1 from '../../../../../assets/images/emojis/male1.svg';
 import userEmoji2 from '../../../../../assets/images/emojis/male2.svg';
 import userEmoji3 from '../../../../../assets/images/emojis/female1.svg';
 import userEmoji4 from '../../../../../assets/images/emojis/female2.svg';
-import { User } from '../../../../../store/slices/userSlice';
+import { defaultUsers, User } from '../../../../../store/slices/userSlice';
 
 interface Prop {
   onComplete: (team: TeamInfo) => any;
@@ -36,11 +36,7 @@ export default function AddTeam({onComplete}: Prop) {
       setCurrentPage(currentPage - 1);
     else {
       if (currentPage == pages.length - 1) {
-        const users: Array<User> = [
-          new User("이상협", "asd", "asd", userEmoji1),
-          new User("나상호", "asd", "asd", userEmoji2),
-          new User("김새은", "asd", "asd", userEmoji3)
-        ];
+        const users: Array<User> = defaultUsers.slice(1, 4);
 
         newTeam.name = '광 | ' + teamTitle;
         newTeam.users = [me, ...users];

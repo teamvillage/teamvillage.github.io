@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useBeforeUnload } from 'react-router-dom';
 import styles from './login.module.scss';
 import { assetType, loadAsset } from '../../../utils/AssetController';
 import { Button, Input } from '../../../components';
 import { useDispatch } from 'react-redux';
-import { User, setUser } from '../../../store/slices/userSlice';
-import userEmoji4 from '../../../assets/images/emojis/female2.svg';
+import { setUser, defaultUsers, defaultProf } from '../../../store/slices/userSlice';
 
 function Login() {
   const [backgroundImage, setBackgroundImage] = useState('');
   const [logoImage, setLogoImage] = useState('');
-  const [isStudent, setIsStudent] = useState(true);
   const dispatch = useDispatch();
+  const me = defaultUsers[0];
+  const prof = defaultProf;
   
   useEffect(() => {
     loadAsset('logo_long.png', assetType.image)
@@ -20,21 +20,19 @@ function Login() {
       .then(img => setBackgroundImage(img.default));
   }, []);
 
-  function login(): string {
-    const me = new User("고수희", "asd", "123", userEmoji4);
-    dispatch(setUser(me));
-    
-    return isStudent ? '/student' : '/professor';
+  function login(isStudent: boolean) {
+    dispatch(setUser(isStudent ? me : prof));
   }
 
   return (
     <div className={styles.main}>
-      <div className={styles.background}>
-        <img src={backgroundImage} alt='background' />
-      </div>
+      <Link to={'/professor'} onClick={() => login(false)}>
+        <div className={styles.background}>
+          <img src={backgroundImage} alt='background' />
+        </div>
+      </Link>
       
       <div className={styles.login}>
-
         <div className={styles.header}>
           <div className={styles.logo}>
             <img src={logoImage} alt="logo" />
@@ -55,7 +53,7 @@ function Login() {
             <p>로그인 상태 유지</p>
           </div>
 
-          <Link to={login()}>
+          <Link to={'/student'} onClick={() => login(true)}>
             <Button className={styles.start}>
               <p>로그인</p>
             </Button>

@@ -1,0 +1,138 @@
+@import '../../../assets/theme/index.scss';
+
+.container {
+  padding: 21px 30px 39px;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+
+  .content {
+    margin-top: 50px;
+  }
+}
+
+.header {
+  height: 33px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .teams {
+    display: flex;
+    align-items: center;
+    height: 33px;
+
+    .teamList {
+      border-radius: 20px;
+      margin-right: 11px;
+      height: 100%;
+      background-color: $SUB_20;
+      padding: 0 3px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      .teamName {
+        margin-right: 30px;
+        &:first-of-type {
+          margin-left: 30px;
+        }
+
+        p {
+          color: $JH_K_50;
+          font-size: 13px;
+          line-height: 15px;
+          font-weight: 500;
+        }
+
+        &.selected {
+          background-color: $JH_B_MAIN_100;
+          border-radius: 21.71px;
+          padding: 6px 15px;
+          
+          p {
+            color: $JH_K_0;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+
+    .addTeam {
+      background-color: $SUB_20;
+      border-radius: 20px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        color: $JH_K_50;
+        font-size: 15px;
+        line-height: 17px;
+        font-weight: 500;
+
+        &:nth-of-type(2) {
+          font-size: 13px;
+          line-height: 15px;
+          font-weight: 600;
+          margin-left: 7px;
+        }
+      }
+    }
+  }
+
+  .users {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    justify-content: flex-end;
+
+    .classNumber {
+      padding: 6px 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+      width: 120px;
+      position: absolute;
+      right: 70px;
+
+      p {
+        font-weight: 500;
+        font-size: 11px;
+        line-height: 20px;
+        color: $JH_K_75;
+      }
+    }
+
+    .userEmoji {
+      background-color: #F3F5FE;
+      width: 31px;
+      height: 31px;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+
+      &:not(.myEmoji) {
+        margin-left: -6px;
+      }
+
+      &.myEmoji {
+        background-color: $JH_K_0;
+        border: 2px solid $JH_B_MAIN_100;
+      }
+    }
+
+    .notice {
+      margin-left: 5px;
+      width: 31px;
+      height: 31px;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $SUB_20;
+    }
+  }
+}

@@ -7,7 +7,6 @@ import { Button } from '../../../components';
 import { Link } from 'react-router-dom';
 import { TeamInfo } from '../../../store/slices/teamSlice';
 
-
 interface Props {
   onSelectTeam?: (team: TeamInfo) => any;
   onAddTeam?: () => any;
@@ -76,9 +75,11 @@ function Base({children, onSelectTeam, onAddTeam, customHeader}: PropsWithChildr
                 <img src={user.emoji} alt='userEmoji' />
               </Button>
           )})}
-          <Button className={`${styles.userEmoji} ${styles.myEmoji}`}>
-            <img src={me.emoji} alt='userEmoji' />
-          </Button>
+          <Link to={'/'} onClick={() => {localStorage.clear()}}>
+            <Button className={`${styles.userEmoji} ${styles.myEmoji}`}>
+              <img src={me.emoji} alt='userEmoji' />
+            </Button>
+          </Link>
           <Button className={styles.notice}>
             <img src={noticeImage} alt='noticeImage' />
           </Button>

@@ -1,11 +1,13 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import userSlice from './slices/userSlice';
 import teamSlice from './slices/teamSlice';
+import classSlice from './slices/classSlice';
 
 export const store = configureStore({
   reducer: {
     user: userSlice.reducer,
-    team: teamSlice.reducer
+    team: teamSlice.reducer,
+    class: classSlice.reducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false})
 });

@@ -21,7 +21,7 @@ import arrowlb from './arrow_lb.png';
 import cameraIcon from './cameraIcon.png';
 import { RootState } from '../../../../../store';
 import { useDispatch, useSelector } from 'react-redux';
-import { User } from '../../../../../store/slices/userSlice';
+import { defaultUsers, User } from '../../../../../store/slices/userSlice';
 import userEmoji1 from '../../../../../assets/images/emojis/male1.svg';
 import userEmoji2 from '../../../../../assets/images/emojis/male2.svg';
 import userEmoji3 from '../../../../../assets/images/emojis/female1.svg';
@@ -49,12 +49,7 @@ export default function Meeting({title, meetings, team}:Props) {
   const [countTimer, setCountTimer] = useState(0);
   const timerRef = useRef<NodeJS.Timer>();
   const me = useSelector((state:RootState) => state.user.user);
-  const users: Array<User> = [
-    new User("이상협", "asd", "asd", userEmoji1),
-    new User("나상호", "asd", "asd", userEmoji2),
-    new User("김새은", "asd", "asd", userEmoji3)
-  ];
-  const teamList = useSelector((state: RootState) => state.team.teamList);
+  const users: Array<User> = defaultUsers.slice(1, 4);
   const dispatch = useDispatch();
 
   useEffect(() => {
