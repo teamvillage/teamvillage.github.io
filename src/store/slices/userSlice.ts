@@ -21,6 +21,8 @@ export class User {
   team?: string;
   lastEnter?: string;
   male?: boolean;
+  strong?: string;
+  weak?: string;
   
   constructor(params: Partial<User>) {
     Object.assign(this, params);
@@ -66,7 +68,9 @@ export const defaultUsers = [
     number: 21900456,
     team: '어벤져스팀',
     lastEnter: '5시간 전',
-    male: false
+    male: false,
+    strong: '소통',
+    weak: '추진'
   }),
   new User({
     name: '김새은',
