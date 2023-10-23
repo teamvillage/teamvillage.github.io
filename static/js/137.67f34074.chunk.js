@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkTeamVillage=self.webpackChunkTeamVillage||[]).push([[137],{5137:function(e,a,c){e.exports=c.p+"static/media/clover_icon.e1602263ae94448160c4.svg"}}]);

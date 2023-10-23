@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkTeamVillage=self.webpackChunkTeamVillage||[]).push([[713],{1713:function(e,a,s){e.exports=s.p+"static/media/underArrow.69124aa05a1666887db9.svg"}}]);
