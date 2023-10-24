@@ -5,9 +5,10 @@ interface Props {
   style?: CSSProperties;
   className?: string;
   onClick?: MouseEventHandler;
+  effectOff?: boolean;
 }
 
-function Button({children, style={}, className='', onClick=undefined}: PropsWithChildren<Props>) {
+function Button({children, style={}, className='', onClick=undefined, effectOff=false}: PropsWithChildren<Props>) {
   const [isClicked, setIsClicked] = useState(false);
 
   const clickAction = () => {
@@ -15,7 +16,7 @@ function Button({children, style={}, className='', onClick=undefined}: PropsWith
   }
 
   return (
-    <div className={`${isClicked ? styles.clicked : ''} ${styles.customButton} ${className}`} style={style} onMouseDown={clickAction} onMouseUp={clickAction} onClick={onClick}>
+    <div className={`${isClicked && !effectOff ? styles.clicked : ''} ${styles.customButton} ${className}`} style={style} onMouseDown={clickAction} onMouseUp={clickAction} onClick={onClick}>
       {children}
     </div>
   )

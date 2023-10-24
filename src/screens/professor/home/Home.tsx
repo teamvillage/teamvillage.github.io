@@ -17,6 +17,13 @@ import step1Img from './step1_img.png';
 import step2Img from './step2_img.png';
 import step3Img from './step3_img.png';
 import groupImg from './groupImg.png';
+import teamDetailImg from './team_detail_img.png';
+import assignPopup1 from './assign_popup1.png';
+import assignPopup2 from './assign_popup2.png';
+import assignPopup3 from './assign_popup3.png';
+import assignPopup4 from './assign_popup4.png';
+import assignPopup5 from './assign_popup5.png';
+import logo_mini from './logo_mini.png';
 import { assetType, loadAsset } from '../../../utils/AssetController';
 
 function Home() {
@@ -290,6 +297,48 @@ function Home() {
     step3
   ];
 
+  const [isDetail, setIsDetail] = useState(false);
+  const detailModal = (
+    <div className={styles.modal}>
+      <Button onClick={() => setIsDetail(false)} className={styles.detail}>
+        <img src={teamDetailImg} />
+      </Button>
+    </div>
+  )
+
+  const [isAssignment, setIsAssignment] = useState(false);
+  const [popupIndex, setPopupIndex] = useState(0);
+  const [isAssignmentExist, setIsAssignmentExist] = useState(false);
+  const assignmentModal = () => {
+    const imgs = [
+      assignPopup1,
+      assignPopup2,
+      assignPopup3,
+      assignPopup4,
+      assignPopup5
+    ]
+
+    return (
+      <div className={styles.modal}>
+        <Button 
+          className={styles.assignment} 
+          effectOff={true}
+          onClick={() => {
+            if (popupIndex == 4) {
+              setIsAssignment(false);
+              setIsAssignmentExist(true);
+              setPopupIndex(0);
+            }
+            else {
+              setPopupIndex(popupIndex + 1);
+            }
+          }}>
+          <img src={imgs[popupIndex]} />
+        </Button>
+      </div>
+    )
+  }
+
   return (
     <Base onSelectClass={(cls: ClassInfo) => {setCurrentClass(cls)}}
           onAddClass={() => {createDummyData();}}>
@@ -318,9 +367,19 @@ function Home() {
               <p>더보기 &gt;</p>
             </div>
             <div className={styles.bottom}>
-              <Button className={styles.startBtn}>
+              <Button className={styles.startBtn} onClick={() => setIsAssignment(true)}>
                 <p>시작하기</p>
               </Button>
+              {
+                isAssignmentExist && 
+                <div className={styles.assignments}>
+                  <div className={styles.assignment}>
+                    <img src={logo_mini} />
+                    <p>1차 동료평가</p>
+                    <p>10.01</p>
+                  </div>
+                </div>
+              }
             </div>
           </div>
           {currentClass?.teams ?
@@ -328,11 +387,11 @@ function Home() {
             <div className={styles.top}>
               <div className={styles.control}>
                 <div className={selectedDiv == 1 ? styles.active : ''} 
-                     onClick={() => setSelectedDiv(1)}>
+                    onClick={() => setSelectedDiv(1)}>
                   <p>학생 개별관리 <span>{currentClass.students?.length}</span></p>
                 </div>
                 <div className={selectedDiv == 2 ? styles.active : ''} 
-                     onClick={() => setSelectedDiv(2)}>
+                    onClick={() => setSelectedDiv(2)}>
                   <p>팀 관리 <span>{currentClass.teams?.length}</span></p>
                 </div>
               </div>
@@ -415,7 +474,11 @@ function Home() {
                         <td><p>-</p></td>
                         <td><p>{team.strong}</p></td>
                         <td><p>{team.weak}</p></td>
-                        <td><div><p>상세</p></div></td>
+                        <td>
+                          <Button onClick={() => setIsDetail(true)}>
+                            <p>상세</p>
+                          </Button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -429,6 +492,8 @@ function Home() {
         </div>
         }
       </div>
+      {isDetail && detailModal}
+      {isAssignment && assignmentModal()}
     </Base>
   )
 }
