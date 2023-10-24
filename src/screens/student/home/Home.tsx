@@ -11,9 +11,6 @@ import Achievement from './modules/achievement/Achievement';
 
 import { defaultUsers, User } from '../../../store/slices/userSlice';
 import { ReportInfo, TeamInfo, TodoInfo, createTeam } from '../../../store/slices/teamSlice';
-import userEmoji1 from '../../../assets/images/emojis/male1.svg';
-import userEmoji2 from '../../../assets/images/emojis/male2.svg';
-import userEmoji3 from '../../../assets/images/emojis/female1.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import AddTeam from './modules/addTeam/AddTeam';
