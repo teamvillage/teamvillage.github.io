@@ -18,6 +18,68 @@
     clip-path: path('M17 0 C10 0 0 10 0 17 V372 C0 372 0 397 25 397 H532 C532 397 557 397 557 372 V85 C557 85 557 60 532 60 H280 L245 15 C245 15 235 0 220 0 Z');
     display: flex;
     flex-direction: column;
+
+    &.yelloCard {
+      background-color: #FFF963E5;
+
+      .yello {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex-grow: 1;
+
+        .info {
+          flex-grow: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          margin-top: 20px;
+
+          p {
+            font-size: 16px;
+            line-height: 25px;
+            color: $JH_K_100;
+
+            span {
+              text-decoration: underline;
+              font-weight: 700;
+            }
+          }
+        }
+
+        .input {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 492px;
+          height: 37px;
+          border: 1.5px dashed $JH_K_100;
+          border-radius: 53px;
+          padding: 5px 5px 5px 16px;
+          margin: 1px 0 35px 0;
+          box-sizing: border-box;
+
+          p {
+            font-size: 16px;
+            color: $JH_K_100;
+          }
+
+          div {
+            background-color: $JH_K_25;
+            border-radius: 20px;
+            width: 66px;
+            height: 28px;
+
+            p {
+              font-weight: 700;
+              color: $JH_K_0;
+              font-size: 12px;
+            }
+          } 
+        }
+      }
+    }
   }
 
   .header {

@@ -42,6 +42,7 @@ export default function Meeting({title, meetings, team}:Props) {
   const [cloverIcon, setCloverIcon] = useState('');
   const [isMeeting, setIsMeeting] = useState(false);
   const [isMeetExist, setIsMeetExist] = useState(false);
+  const [isYello, setIsYello] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const [isTaskModal, setIsTaskModal] = useState(false);
   const [recentMeetings, setRecentMeetings] = useState<Array<ReportInfo>>([]);
@@ -421,6 +422,7 @@ export default function Meeting({title, meetings, team}:Props) {
           setIsMeeting(false);
           setRecentMeetings(recentMeetings.slice(1));
           dispatch(endMeeting(recentMeetings[0]));
+          setIsYello(true);
         }}>
           <p>회의 끝내기</p>
         </Button>
@@ -556,14 +558,36 @@ export default function Meeting({title, meetings, team}:Props) {
     </div>
   )}
 
+  const [isClicked, setIsClicked] = useState(false);
   return (
     <div className={styles.meeting}>
       <div className={styles.shadow}>
-        <div className={styles.background}>
+        <div className={`${styles.background} ${isYello ? styles.yelloCard : ''}`}>
           <div className={styles.header}>
             <img src={cloverIcon} alt='logo' />
-            <p>{title}</p>
+            <p>{isYello ? "옐로카드" : title}</p>
           </div>
+          {isYello ? 
+          <div className={styles.yello}>
+            <div className={styles.info}>
+              <p>지난 회의 때 적극성 부족으로 경고를 받았습니다.</p>
+              <p>오늘은 그러지 않겠다는 뜻에서</p>
+              <p><span>‘실패해도 좋아. 아이디어 많이 내자!'</span> 를 써주세요!</p>
+            </div>
+            <div className={styles.input}>
+              <p>{isClicked ? "실패해도 좋아. 아이디어 많이 내자!" : ''}</p>
+              <Button onClick={() => {
+                if (isClicked) {
+                  setIsClicked(false);
+                  setIsYello(false);
+                }
+                setIsClicked(true);
+              }}>
+                <p>다음</p>
+              </Button>
+            </div>
+          </div>
+          :
           <div className={styles.content}>
             <div className={styles.log}>
               {(isMeetExist && recentMeetings.length > 0) &&
@@ -617,6 +641,7 @@ export default function Meeting({title, meetings, team}:Props) {
               </Button>
             </div>
           </div>
+          }
         </div>
       </div>
       {isModal && createMeetingModal()}
