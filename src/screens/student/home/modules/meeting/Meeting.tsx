@@ -22,9 +22,13 @@ import cameraIcon from './cameraIcon.png';
 import { RootState } from '../../../../../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { defaultUsers, User } from '../../../../../store/slices/userSlice';
-import userEmoji1 from '../../../../../assets/images/emojis/male1.svg';
-import userEmoji2 from '../../../../../assets/images/emojis/male2.svg';
-import userEmoji3 from '../../../../../assets/images/emojis/female1.svg';
+import step1Img from './step1_img.png';
+import step2Img from './step2_img.png';
+import step3Img from './step3_img.png';
+import star from './star.png';
+import starActive from './star_active.png';
+import groupImg from './group_img.png';
+import xIcon from './x_icon.png';
 
 interface Props {
   title: string;
@@ -39,6 +43,7 @@ export default function Meeting({title, meetings, team}:Props) {
   const [isMeeting, setIsMeeting] = useState(false);
   const [isMeetExist, setIsMeetExist] = useState(false);
   const [isModal, setIsModal] = useState(false);
+  const [isTaskModal, setIsTaskModal] = useState(false);
   const [recentMeetings, setRecentMeetings] = useState<Array<ReportInfo>>([]);
   const [isCamera, setIsCamera] = useState<boolean>(false);
   const [tasks, setTasks] = useState<Array<TodoInfo>>([]);
@@ -103,7 +108,12 @@ export default function Meeting({title, meetings, team}:Props) {
   useEffect(() => {
     if (isMounted.current) {
       const getUserDevices = async () => {
-        const media = await navigator.mediaDevices.getUserMedia({video: true});
+        const media = await navigator.mediaDevices.getUserMedia({
+          video: {
+            width: 230,
+            height: 405
+          }
+        });
         media.getTracks().forEach(e => {
           if (e.id != media.getVideoTracks()[0].id)
             e.stop();
@@ -263,11 +273,26 @@ export default function Meeting({title, meetings, team}:Props) {
                 </div>
                 <div className={styles.taskContent}>
                   {tasks.length == 0 ?
-                  <Button className={styles.addBtn}>
+                  <Button className={styles.addBtn} onClick={() => setIsTaskModal(true)}>
                     <p>+ 태스크 추가</p>
                   </Button>
                   :
-                  <p></p>}
+                  tasks.map((task, i) => (
+                    <div className={`${styles.task} ${task.user.isEqual(me) ? styles.myTask : ''}`} key={i}>
+                      <div className={styles.emoji}>
+                        <img src={task.user.emoji} />
+                      </div>
+                      <p>{task.title}</p>
+                      <div>
+                        <img src={starActive} />
+                        <img src={starActive} />
+                        <img src={star} />
+                        <img src={star} />
+                        <img src={star} />
+                      </div>
+                      <p>{moment(task.due).format('MM.DD')}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className={styles.memo}>
@@ -403,6 +428,134 @@ export default function Meeting({title, meetings, team}:Props) {
     )
   }
 
+  const [currentStep, setCurrentStep] = useState(1);
+  const [currentTasks, setCurrentTasks] = useState<Array<TodoInfo>>([]);
+  const createTaskModal = () => {
+    const stepImgs = [step1Img, step2Img, step2Img, step3Img];
+
+    return (
+    <div className={`${styles.modal} ${styles.createTasks}`}>
+      <div className={styles.createTask}>
+        <div className={styles.top}>
+          <img src={stepImgs[currentStep - 1]} />
+          <Button onClick={() => setIsTaskModal(false)}>
+            <img src={xIcon} />
+          </Button>
+        </div>
+        <div className={styles.info}>
+          {currentStep == 1 ? 
+          <div>
+            <p>오늘의 태스크 리스트업</p>
+            <p>수행해야 하는 태스크를 리스트업 해주세요.</p>
+            <p>자세하면 자세할수록 좋습니다.</p>
+          </div>
+          :
+          currentStep == 2 ?
+          <div>
+            <p>태스크 난이도 설정</p>
+            <p>앞서 리스트업한 태스크에</p>
+            <p>각자의 역량에 따라 별을 매겨주세요.</p>
+          </div>
+          :
+          currentStep == 3 ?
+          <div>
+            <p>AI 태스크 분배 중</p>
+            <p>AI가 난이도와 역량에 따라</p>
+            <p>태스크를 분배하고 있습니다.</p>
+          </div>
+          :
+          <div>
+            <p>태스크 분배 완료</p>
+            <p>AI가 분석하여 각자의 역량에 맞게</p>
+            <p>태스크를 분배하였습니다.</p>
+            <p>모두가 동일하게 측정한 태스크는 랜덤으로 배치되며,</p>
+            <p>해당 결과는 팀원 내 의사소통을 통해 조정이 가능합니다.</p>
+          </div>
+          }
+        </div>
+        <div className={styles.bottom}>
+          {currentStep == 1 ?
+          <div className={styles.taskList}>
+            {currentTasks.map((task, i) => (
+              <div className={styles.task} key={i}>
+                <p>{task.title}</p>
+                <p>{moment(task.due).format('MM.DD')}</p>
+              </div>
+            ))}
+            <div className={`${styles.task} ${styles.input}`}>
+              <p>논문 3개 요약해오기</p>
+              <p>09.27</p>
+            </div>
+            <Button className={`${styles.task}`}
+            onClick={() => {
+              team?.reports.map(report => report.todos)
+              .map(todos => {
+                todos.map(todo => currentTasks.push(todo));
+              });
+            }}>
+              <p>+ 태스크 추가하기</p>
+            </Button>
+          </div>
+          :
+          currentStep == 2 ?
+          <div className={styles.taskList}>
+            {currentTasks.map((task, i) => (
+              <div className={styles.task} key={i}>
+                <p>{task.title}</p>
+                <div>
+                  <img src={star} />
+                  <img src={star} />
+                  <img src={star} />
+                  <img src={star} />
+                  <img src={star} />
+                </div>
+              </div>
+            ))}
+          </div>
+          :
+          currentStep == 3 ?
+          <div className={styles.img}>
+            <img src={groupImg} />
+          </div>
+          :
+          currentStep == 4 ?
+          <div className={`${styles.taskList} ${styles.taskCheck}`}>
+            {currentTasks.map((task, i) => (
+              <div key={i} className={task.user.isEqual(me) ? styles.me : ''}>
+                <div><img src={task.user.emoji} /></div>
+                <p>{task.title}</p>
+              </div>
+            ))}
+          </div>
+          :
+          <></>
+          }
+        </div>
+        {currentStep == 1 ?
+        <Button className={styles.btn} onClick={() => setCurrentStep(currentStep + 1)}>
+          <p>확인</p>
+        </Button>
+        :
+        <div className={styles.btns}>
+          <Button onClick={() => setCurrentStep(currentStep - 1)}>
+            <p>{currentStep == 4 ? "태스크 분배" : "이전"}</p>
+          </Button> 
+          <Button onClick={() => {
+            if (currentStep == 4) {
+              setIsTaskModal(false);
+              setTasks(currentTasks);
+            }
+            else
+              setCurrentStep(currentStep + 1)
+          }}>
+            <p>다음</p>
+          </Button>
+        </div>
+        }
+      </div>
+    </div>
+  )}
+
   return (
     <div className={styles.meeting}>
       <div className={styles.shadow}>
@@ -469,6 +622,7 @@ export default function Meeting({title, meetings, team}:Props) {
       {isModal && createMeetingModal()}
       {isMeeting && meeting()}
       {isMeeting && fab()}
+      {isTaskModal && createTaskModal()}
     </div>
   )
 }

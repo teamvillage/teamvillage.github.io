@@ -1,5 +1,6 @@
 import styles from './achievement.module.scss';
 import infoIcon from './infoIcon.png';
+import completeZeroImage from './complete_zero.png';
 import completeImage from './complete.png';
 import { TeamInfo } from '../../../../../store/slices/teamSlice';
 
@@ -49,7 +50,7 @@ export default function Achievement({teamInfo}: Props) {
               <p>상대의 의견을 경청합시다.</p>
             </div>
           </div>
-          <img src={completeImage} alt='image' />
+          <img src={teamInfo.reports.length > 0 ? completeImage : completeZeroImage} alt='image' />
         </div>
       }
       </div>

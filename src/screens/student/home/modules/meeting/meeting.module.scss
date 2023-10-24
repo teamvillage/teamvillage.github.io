@@ -309,6 +309,195 @@
       }
     }
   }
+
+  &.createTasks {
+    z-index: 4;
+
+    .createTask {
+      width: 363px;
+      box-sizing: border-box;
+      height: 542px;
+      background-color: white;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 29px 25px;
+
+      .top {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .info {
+        width: 100%;
+        margin-bottom: 54px;
+        margin-top: 41px;
+
+        p {
+          font-weight: 500;
+          font-size: 13px;
+          line-height: 18px;
+          color: $JH_K_100;
+
+          &:first-of-type {
+            font-weight: 700;
+            font-size: 27px;
+            line-height: 32px;
+            margin-bottom: 14px;
+          }
+        }
+      }
+
+      .bottom {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        margin-bottom: 18px;
+        height: 242px;
+        box-sizing: border-box;
+        overflow-y: scroll;
+        scrollbar-width: 0;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        .taskList {
+          width: 100%;
+          max-height: 242px;
+
+          .task {
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid $JH_K_10;
+            border-radius: 5px;
+            padding: 4px 9px;
+            height: 29px;
+            margin-top: 5px;
+
+            p {
+              font-size: 12px;
+              color: $JH_K_100;
+            }
+
+            &.input {
+              p {
+                color: $JH_K_10;
+              }
+            }
+          }
+        }
+      }
+
+      .img {
+        flex-grow: 1;
+        padding-top: 50px;
+      }
+
+      .taskCheck {
+        & > div {
+          width: 100%;
+          height: 30px;
+          box-sizing: border-box;
+          border: 1px solid $JH_K_10;
+          padding: 5px 7px;
+          display: flex;
+          align-items: center;
+          margin-top: 6px;
+          border-radius: 5px;
+
+          &.me {
+            border: none;
+            background-color: $JH_B_SUB_100;
+          }
+
+          & > div {
+            margin-right: 8px;
+            background-color: white;
+            border-radius: 100%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+              width: 15px;
+              height: 15px;
+            }
+          }
+
+          p {
+            font-size: 12px;
+            color: $JH_K_100;
+          }
+        }
+      }
+
+      .btn {
+        width: 100%;
+        background-color: $JH_B_MAIN_100;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 34px;
+
+        p {
+          color: $JH_K_0;
+          font-weight: 700;
+          font-size: 13px;
+        }
+      }
+
+      .btns {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        div {
+          width: 147px;
+          height: 33px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 5px;
+
+          &:first-of-type {
+            border: 1px solid $JH_B_MAIN_100;
+
+            p {
+              color: $JH_B_MAIN_100;
+            }
+          }
+
+          &:last-of-type {
+            background-color: $JH_B_MAIN_100;
+
+            p {
+              color: $JH_K_0;
+            }
+          }
+
+          p {
+            font-weight: 700;
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
 }
 
 .meetingScreen {
@@ -438,6 +627,53 @@
           font-size: 18px;
           line-height: 25px;
           color: $JH_K_100;
+        }
+
+        .task {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          padding: 4px 6px;
+          background-color: white;
+          border-radius: 50px;
+          margin-bottom: 8px;
+
+          &.myTask {
+            background-color: $JH_B_SUB_100;
+          }
+
+          .emoji {
+            width: 25px;
+            height: 25px;
+            background-color: white;
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+
+            & + p {
+              flex-grow: 1;
+              font-size: 15px;
+              color: $JH_K_100;
+
+              & + div{
+                width: 75px;
+
+                img {
+                  width: 13px;
+                }
+
+                & + p {
+                  width: 29px;
+                  font-size: 13px;
+                  color: $JH_K_100;
+                  margin-right: 10px;
+                }
+              }
+            }
+          }
         }
       }
     }
