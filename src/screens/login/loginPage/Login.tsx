@@ -63,9 +63,9 @@ function Login() {
         <div className={styles.info}>
           <div className={styles.horizontalLine}></div>
           <div className={styles.additional}>
-            <Link to='/findId'><p>아이디 찾기</p></Link>
+            <Link to='/' onClick={() => localStorage.clear()}><p>아이디 찾기</p></Link>
             <div className={`${styles.verticalLine}`}></div>
-            <Link to='/findPassword'><p>비밀번호 찾기</p></Link>
+            <Link to='/' onClick={() => localStorage.clear()}><p>비밀번호 찾기</p></Link>
             <div className={`${styles.verticalLine}`}></div>
             <Link to='/signup'><p>회원가입</p></Link>
           </div>

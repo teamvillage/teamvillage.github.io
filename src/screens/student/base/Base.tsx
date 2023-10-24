@@ -83,7 +83,7 @@ function Base({children, onSelectTeam, onAddTeam, customHeader, isBackExist=fals
                 <img src={user.emoji} alt='userEmoji' />
               </Button>
           )})}
-          <Link to={'/'} onClick={() => {localStorage.clear()}}>
+          <Link to={'/'}>
             <Button className={`${styles.userEmoji} ${styles.myEmoji}`}>
               <img src={me.emoji} alt='userEmoji' />
             </Button>
