@@ -5,9 +5,10 @@ import arrow from './rightarrow.svg';
 
 interface Props {
   reports?: Array<ReportInfo>;
+  onReportClick?: () => any;
 }
 
-export default function Report({reports}:Props) {
+export default function Report({reports, onReportClick}:Props) {
   const moment = require('moment');
   const sortedReports = reports
     ?.filter(report => moment(report.endTime).diff(moment(), 'seconds') < 0)
@@ -21,7 +22,9 @@ export default function Report({reports}:Props) {
     const keywords = data.keywords?.slice(0, 3);
 
     return (
-      <div className={styles.card}>
+      <Button className={styles.card} onClick={() => {
+        if (onReportClick) onReportClick();
+      }}>
         <div className={styles.cardHeader}>
           <div className={styles.cardTitle}>
             <p>{data.title}</p>
@@ -42,7 +45,7 @@ export default function Report({reports}:Props) {
             {keywords?.map((e, i) => <p key={i}>{e}</p>)}
           </div>
         </div>
-      </div>
+      </Button>
     )
   }
 

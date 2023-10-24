@@ -6,14 +6,17 @@ import { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
 import { Button } from '../../../components';
 import { Link } from 'react-router-dom';
 import { TeamInfo } from '../../../store/slices/teamSlice';
+import backIcon from './backIcon.png';
 
 interface Props {
   onSelectTeam?: (team: TeamInfo) => any;
   onAddTeam?: () => any;
-  customHeader?: ReactNode
+  customHeader?: ReactNode;
+  isBackExist?: boolean;
+  backHandler?: () => any;
 }
 
-function Base({children, onSelectTeam, onAddTeam, customHeader}: PropsWithChildren<Props>) {
+function Base({children, onSelectTeam, onAddTeam, customHeader, isBackExist=false, backHandler}: PropsWithChildren<Props>) {
   const [logoImage, setLogoImage] = useState('');
   const [noticeImage, setNoticeImage] = useState('');
   const [selectedTeamIdx, setTeamIdx] = useState(0);
@@ -40,6 +43,11 @@ function Base({children, onSelectTeam, onAddTeam, customHeader}: PropsWithChildr
       <div className={styles.header}>
         <Link to='/student'>
           <div className={styles.logo}>
+            {isBackExist && 
+            <Button className={styles.back} onClick={() => {backHandler!();}}>
+              <img src={backIcon} />
+            </Button>
+            }
             <img src={logoImage} />
           </div>
         </Link>

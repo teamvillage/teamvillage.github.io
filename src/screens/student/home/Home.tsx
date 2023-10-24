@@ -14,6 +14,7 @@ import { ReportInfo, TeamInfo, TodoInfo, createTeam } from '../../../store/slice
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import AddTeam from './modules/addTeam/AddTeam';
+import groupImg from './group_img.png';
 
 function Home() {
   const [currentTeam, setCurrentTeam] = useState<TeamInfo>();
@@ -161,6 +162,7 @@ function Home() {
     });
   }
 
+  const [isReportClicked, setIsReportClicked] = useState(false);
   const content = (
     <div>
       <div className={styles.top}>
@@ -172,6 +174,9 @@ function Home() {
         </div>
         <div className={styles.report}>
           <Report 
+            onReportClick={() => {
+              setIsReportClicked(!isReportClicked);
+            }}
             reports={currentTeam?.reports} />
         </div>
       </div>
@@ -192,15 +197,26 @@ function Home() {
     </div>
   )
 
+  const reportModal = (
+    <div className={styles.reportModal}>
+      <img src={groupImg} />
+    </div>
+  )
+
   return (
     <Base onSelectTeam={(team: TeamInfo) => {setCurrentTeam(team);}}
-          onAddTeam={() => {createDummyData();}}>
+          onAddTeam={() => {createDummyData();}}
+          isBackExist={isReportClicked}
+          backHandler={() => {setIsReportClicked(false);}}>
       {(tanagement === null) ? 
       <Tanagement onComplete={() => {
         localStorage.setItem('tanagement', 'ok');
         setTanagement('ok');
       }}/> 
       : 
+      isReportClicked ? 
+      reportModal
+      :
       <div className={styles.container}>
         { teamList.length === 0 ? 
         <AddTeam onComplete={(team: TeamInfo) => {
