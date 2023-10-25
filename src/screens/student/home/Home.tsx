@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import AddTeam from './modules/addTeam/AddTeam';
 import groupImg from './group_img.png';
+import soundImg from './sound_bgimg.png';
 
 function Home() {
   const [currentTeam, setCurrentTeam] = useState<TeamInfo>();
@@ -197,11 +198,53 @@ function Home() {
     </div>
   )
 
-  const reportModal = (
+  const reportModal = () => {
+    const flow = [
+      [defaultUsers[0], "00:00:05", "안녕하세요. 다 들어오셨으면 회의 시작할게요"],
+      [defaultUsers[1], "00:00:15", "네 좋습니다"],
+      [defaultUsers[2], "00:01:40", "수업 자료를 보니까 조금 헷갈리는 부분이 있었는데 그럼 저희가 나이키에 대한 자료와 다양한 광고 자료를 보고 그에 대한 프로포절을 작성해서 가는 것이 맞는 건가요?"],
+      [defaultUsers[3], "00:02:30", "네 그런걸로 알고 있는데 발표가 2주 뒤입니다"],
+      [defaultUsers[2], "00:03:11", "그렇구나 근데 제가 그 주에 공모전이 있어서 발표 자료는 어떻게 만들겠는데 발표를 할 수 있을지는 모르겠습니다"],
+      [defaultUsers[1], "00:03:58", "공모전이랑 발표가 상관이 있나요? 정말 궁금해서 여쭤봅니다"],
+      [defaultUsers[2], "00:04:10", "공모전 준비 기간이 있는 상황에서 발표를 담당하는게 쉽지 않다는 결론이 나왔습니다"],
+      [defaultUsers[0], "00:05:05", "누가 무엇을 얼만큼 할 것인지에 대해서는 뒤에서 차근차근 이야기해보고 각자 자료 조사한거 가볍게 이야기해봐요"],
+      [defaultUsers[0], "00:06:05", "없으면 저부터 하겠습니다 광고는 여러모로 일상생활에 긍정적인 영향을 끼칠 뿐만 아니라 많은 생각과 다양한 아이디어를 줄 수 있습니다"],
+      [defaultUsers[3], "00:10:30", "저도 수희님이랑 비슷한 생각을 했습니다 광고를 부정적인 시선으로 볼 것만이 아니라는 것을 어필해야할 것 같습니다"],
+      [defaultUsers[1], "00:12:03", "저는 반대로 광고의 부정적인 측면들에 대해서 정리했습니다 허위된 사실들을 보는 사람들에게 무분별로 노출이 됩니다 이렇게 하면 그걸 보는 사람들이 객관적인 판단을 하는 데 어려움을 줄 수 있습니다"],
+      [defaultUsers[2], "00:15:30", "저도 부정적인 측면들에 대해서 생각을 했습니다 모두에게 소비를 빠르게 그리고 무분별하게 하도로고 독촉을 한다는 점이 있습니다"],
+      [defaultUsers[0], "00:17:00", "저는 혹시 몰라서 나이키도 조금 조사했는데 하하"],
+      [defaultUsers[1], "00:17:30", "아 그럼 지금 공유해주지 마시고 나중에 필요할 때 말씀해주실 수 있을까요? 수희님꺼 듣고 과제를 임하면 저도 모르게 수희님이 생각하시는 방향으로 따라갈 것 같아서 의견을 내봅니다"],
+      [defaultUsers[3], "00:19:20", "음 좋은 것 같아요 더 많은 아이디어를 가지고 오는 걸로 합시다"],
+      [defaultUsers[0], "00:20:00", "네 그럼 나이키에 대해서 본격적으로 찾기 전에 광고 쪽 레퍼런스들을 찾아오는 것이 중요할 것 같아요. 아니면 2명 2명 나눠서 나이키와 광고 한팀 씩 맞는 걸로 하겠습니다"],
+      [defaultUsers[1], "00:20:50", "좋은 것 같아요 그럼 팀을 어떻게 짜는게 좋을까요?"],
+      [defaultUsers[2], "00:25:00", "각자 더 관심있는 분야로 할까요? 저는 광고쪽 리서치가 더 끌리네요"],
+      [defaultUsers[3], "00:27:08", "그럼 저는 나이키 할게요! 저랑 나이키 조사하실 분 있나요?"],
+      [defaultUsers[0], "00:28:00", "제가 할게요"],
+      [defaultUsers[0], "00:28:20", "다음주 월요일 오후 7시까지 해오고 파일 공유하도록 해요"],
+      [defaultUsers[1], "00:29:50", "네 감사합니다 다음주에 뵐게요"],
+      [defaultUsers[2], "00:30:03", "네 다들 안녕히 가세요"]
+    ];
+
+    return (
     <div className={styles.reportModal}>
+      <img src={soundImg} />
+      <div className={styles.flow}>
+        {flow.map((item, i) => (
+          <div className={styles.item} key={i}>
+            <img src={(item[0] as User).emoji} />
+            <div className={styles.itemDetail}>
+              <div>
+                <p>{(item[0] as User).name}</p>
+                <p>{item[1] as string}</p>
+              </div>
+              <p>{item[2] as string}</p>
+            </div>
+          </div>
+        ))}
+      </div>
       <img src={groupImg} />
     </div>
-  )
+  )}
 
   return (
     <Base onSelectTeam={(team: TeamInfo) => {setCurrentTeam(team);}}
@@ -215,7 +258,7 @@ function Home() {
       }}/> 
       : 
       isReportClicked ? 
-      reportModal
+      reportModal()
       :
       <div className={styles.container}>
         { teamList.length === 0 ? 

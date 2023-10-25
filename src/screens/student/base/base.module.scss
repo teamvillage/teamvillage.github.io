@@ -5,6 +5,7 @@
   box-sizing: border-box;
   width: 100vw;
   height: 100vh;
+  position: relative;
 
   .content {
     margin-top: 50px;
@@ -21,9 +22,15 @@
     display: flex;
     align-items: center;
 
+    img {
+      width: 115px;
+      height: 20px;
+    }
+
     .back {
       margin-right: 8px;
       img {
+        width: inherit;
         height: 18px;
       }
     }
@@ -97,6 +104,7 @@
   .users {
     display: flex;
     align-items: center;
+    position: relative;
 
     .userEmoji {
       background-color: #F3F5FE;
@@ -128,5 +136,32 @@
       justify-content: center;
       background-color: $SUB_20;
     }
+
+    .noticeImg {
+      position: absolute;
+      right: -12px;
+      top: 31px;
+    }
+  }
+}
+
+.modal {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $JH_K_100_50;
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.05));
+
+  .assign {
+    width: 363px;
+    height: 542px;
+    background-color: white;
+    border-radius: 15px;
   }
 }

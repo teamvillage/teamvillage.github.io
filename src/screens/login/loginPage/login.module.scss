@@ -23,6 +23,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        img {
+          width: 115px;
+          height: 20px;
+        }
       }
 
       .login_title {

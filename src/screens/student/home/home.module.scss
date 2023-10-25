@@ -34,7 +34,81 @@
 
 
 .reportModal {
-  img {
-    width: 1134px;
+  position: relative;
+
+  img:first-of-type {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 461px;
+    height: 392px;
+  }
+
+  .flow {
+    width: 415px;
+    height: 260px;
+    position: absolute;
+    top: 110px;
+    left: 23px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    z-index: 5;
+
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 19px;
+
+      img {
+        width: 27px;
+        height: 27px;
+        position: inherit;
+        margin-right: 3px;
+      }
+
+      .itemDetail {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-top: 5px;
+
+        & > div {
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px;
+
+          p:first-of-type {
+            font-size: 10px;
+            line-height: 13px;
+            color: #313131;
+            margin-right: 7px;
+          }
+
+          p:last-of-type {
+            font-size: 10px;
+            line-height: 13px;
+            color: #999696;
+          }
+        }
+
+        & > p {
+          font-weight: 500;
+          font-size: 10px;
+          line-height: 13px;
+          color: #313131;
+        }
+      }
+    }
+  }
+
+  img:last-of-type {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1132px;
+    height: 686px;
   }
 }

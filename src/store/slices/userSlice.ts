@@ -79,7 +79,9 @@ export const defaultUsers = [
     number: 22300453,
     team: '어벤져스팀',
     lastEnter: '40분 전',
-    male: false
+    male: false,
+    strong: '추진',
+    weak: '완성'
   }),
   new User({
     name: '김재호',
@@ -88,7 +90,9 @@ export const defaultUsers = [
     number: 21600234,
     team: '끝내주조팀',
     lastEnter: '일주일 전',
-    male: true
+    male: true,
+    strong: '추진',
+    weak: '소통'
   }),
   new User({
     name: '나영호',
@@ -97,7 +101,9 @@ export const defaultUsers = [
     number: 22100235,
     team: '어벤져스팀',
     lastEnter: '1시간 전',
-    male: true
+    male: true,
+    strong: '완성',
+    weak: '소통'
   }),
   new User({
     name: '이상협',
@@ -106,7 +112,9 @@ export const defaultUsers = [
     number: 21700523,
     team: '어벤져스팀',
     lastEnter: '30분 전',
-    male: true
+    male: true,
+    strong: '추진',
+    weak: '완성'
   }),
   new User({
     name: '이수현',
@@ -115,7 +123,9 @@ export const defaultUsers = [
     number: 22200482,
     team: '끝내주조팀',
     lastEnter: '35분 전',
-    male: false
+    male: false,
+    strong: '소통',
+    weak: '리더십'
   }),
   new User({
     name: '윤수정',
@@ -124,7 +134,9 @@ export const defaultUsers = [
     number: 21900382,
     team: '오리무중팀',
     lastEnter: '1분 전',
-    male: false
+    male: false,
+    strong: '완성',
+    weak: '추진'
   }),
   new User({
     name: '정윤수',
@@ -133,7 +145,9 @@ export const defaultUsers = [
     number: 22100892,
     team: '오리무중팀',
     lastEnter: '3일 전',
-    male: true
+    male: true,
+    strong: '리더십',
+    weak: '소통'
   }),
   new User({
     name: '최경헌',
@@ -142,7 +156,9 @@ export const defaultUsers = [
     number: 21800321,
     team: '오리무중팀',
     lastEnter: '2시간 전',
-    male: true
+    male: true,
+    strong: '추진',
+    weak: '완성'
   }),
   new User({
     name: '황재현',
@@ -151,7 +167,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '오리무중팀',
     lastEnter: '2일 전',
-    male: true
+    male: true,
+    strong: '리더십',
+    weak: '추진'
   }),
   new User({
     name: '이수현',
@@ -160,7 +178,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '끝내주조팀',
     lastEnter: '2일 전',
-    male: false
+    male: false,
+    strong: '소통',
+    weak: '추진'
   }),
   new User({
     name: '김재호',
@@ -169,7 +189,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '끝내주조팀',
     lastEnter: '2일 전',
-    male: true
+    male: true,
+    strong: '완성', 
+    weak: '소통'
   }),
   new User({
     name: '윤정아',
@@ -178,7 +200,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '산중호걸팀',
     lastEnter: '2일 전',
-    male: false
+    male: false,
+    strong: '소통',
+    weak: '추진'
   }),
   new User({
     name: '최정선',
@@ -187,7 +211,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '산중호걸팀',
     lastEnter: '2일 전',
-    male: true
+    male: true,
+    strong: '소통',
+    weak: '추진'
   }),
   new User({
     name: '강희진',
@@ -196,7 +222,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '산중호걸팀',
     lastEnter: '2일 전',
-    male: false
+    male: false,
+    strong: '소통',
+    weak: '추진'
   }),
   new User({
     name: '최유나',
@@ -205,7 +233,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '산중호걸팀',
     lastEnter: '2일 전',
-    male: false
+    male: false,
+    strong: '소통',
+    weak: '추진'
   }),
   new User({
     name: '최유진',
@@ -214,7 +244,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '아자아자팀',
     lastEnter: '2일 전',
-    male: false
+    male: false,
+    strong: '소통',
+    weak: '추진'
   }),
   new User({
     name: '김현모',
@@ -223,7 +255,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '아자아자팀',
     lastEnter: '2일 전',
-    male: true
+    male: true,
+    strong: '소통',
+    weak: '추진'
   }),
   new User({
     name: '조예림',
@@ -232,7 +266,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '아자아자팀',
     lastEnter: '2일 전',
-    male: false
+    male: false,
+    strong: '소통',
+    weak: '추진'
   }),
   new User({
     name: '박상진',
@@ -241,7 +277,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '아자아자팀',
     lastEnter: '2일 전',
-    male: true
+    male: true,
+    strong: '소통',
+    weak: '추진'
   }),
   new User({
     name: '윤슬기',
@@ -250,7 +288,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '불꽃놀이팀',
     lastEnter: '2일 전',
-    male: false
+    male: false,
+    strong: '소통',
+    weak: '추진'
   }),
   new User({
     name: '최명호',
@@ -259,7 +299,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '불꽃놀이팀',
     lastEnter: '2일 전',
-    male: true
+    male: true,
+    strong: '소통',
+    weak: '추진'
   }),
   new User({
     name: '황정선',
@@ -268,7 +310,9 @@ export const defaultUsers = [
     number: 22000342,
     team: '불꽃놀이팀',
     lastEnter: '2일 전',
-    male: true
+    male: true,
+    strong: '소통',
+    weak: '추진'
   }),
   new User({
     name: '이세하',
@@ -277,6 +321,8 @@ export const defaultUsers = [
     number: 22000342,
     team: '불꽃놀이팀',
     lastEnter: '2일 전',
-    male: false
+    male: false,
+    strong: '소통',
+    weak: '추진'
   })
 ]
