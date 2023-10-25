@@ -285,11 +285,11 @@ export default function Meeting({title, meetings, team}:Props) {
                       </div>
                       <p>{task.title}</p>
                       <div>
-                        <img src={starActive} />
-                        <img src={starActive} />
-                        <img src={star} />
-                        <img src={star} />
-                        <img src={star} />
+                        <img src={task.importance >= 1 ? starActive : star} />
+                        <img src={task.importance >= 2 ? starActive : star} />
+                        <img src={task.importance >= 3 ? starActive : star} />
+                        <img src={task.importance >= 4 ? starActive : star} />
+                        <img src={task.importance >= 5 ? starActive : star} />
                       </div>
                       <p>{moment(task.due).format('MM.DD')}</p>
                     </div>
@@ -432,8 +432,15 @@ export default function Meeting({title, meetings, team}:Props) {
 
   const [currentStep, setCurrentStep] = useState(1);
   const [currentTasks, setCurrentTasks] = useState<Array<TodoInfo>>([]);
+  const checkRef = useRef<Array<Array<HTMLImageElement | null>>>([]);
   const createTaskModal = () => {
     const stepImgs = [step1Img, step2Img, step2Img, step3Img];
+    const checkStars = (idx: number, end: number) => {
+      for (let i = 0; i <= end; i++)
+        checkRef.current[idx][i]!.src = starActive;
+      for (let i = end + 1; i < 5; i++)
+        checkRef.current[idx][i]!.src = star;
+    }
 
     return (
     <div className={`${styles.modal} ${styles.createTasks}`}>
@@ -501,18 +508,47 @@ export default function Meeting({title, meetings, team}:Props) {
           :
           currentStep == 2 ?
           <div className={styles.taskList}>
-            {currentTasks.map((task, i) => (
+            {currentTasks.map((task, i: number) => {
+              checkRef.current[i] = [];
+              task.importance = 0;
+
+              return (
               <div className={styles.task} key={i}>
                 <p>{task.title}</p>
-                <div>
-                  <img src={star} />
-                  <img src={star} />
-                  <img src={star} />
-                  <img src={star} />
-                  <img src={star} />
+                <div className={styles.stars}>
+                  <Button onClick={() => {
+                    checkStars(i, 0);
+                    task.importance = 1;
+                  }}>
+                    <img src={star} ref={e => checkRef.current[i][0] = e} />
+                  </Button>
+                  <Button onClick={() => {
+                    checkStars(i, 1);
+                    task.importance = 2;
+                  }}>
+                    <img src={star} ref={e => checkRef.current[i][1] = e} />
+                  </Button>
+                  <Button onClick={() => {
+                    checkStars(i, 2);
+                    task.importance = 3;
+                  }}>
+                    <img src={star} ref={e => checkRef.current[i][2] = e} />
+                  </Button>
+                  <Button onClick={() => {
+                    checkStars(i, 3);
+                    task.importance = 4;
+                  }}>
+                    <img src={star} ref={e => checkRef.current[i][3] = e} />
+                  </Button>
+                  <Button onClick={() => {
+                    checkStars(i, 4);
+                    task.importance = 55;
+                  }}>
+                    <img src={star} ref={e => checkRef.current[i][4] = e} />
+                  </Button>
                 </div>
               </div>
-            ))}
+            )})}
           </div>
           :
           currentStep == 3 ?
