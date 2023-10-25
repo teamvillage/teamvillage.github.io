@@ -845,6 +845,10 @@
       overflow: hidden;
       position: relative;
 
+      & > img {
+        max-height: 210px;
+      }
+
       video {
         width: 100%;
         height: 100%;

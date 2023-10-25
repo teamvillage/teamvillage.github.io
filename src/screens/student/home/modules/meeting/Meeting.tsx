@@ -11,8 +11,8 @@ import fEmoji1 from './f_emoji1.png';
 import fEmoji1A from './f_emoji1_ano.png';
 import fEmoji2 from './f_emoji2.png';
 import fEmoji2A from './f_emoji2_ano.png';
-// import mEmoji1 from './m_emoji1.png';
-// import mEmoji1A from './m_emoji1_ano.png';
+import mEmoji1 from './m_emoji1.png';
+import mEmoji1A from './m_emoji1_ano.png';
 import mEmoji2 from './m_emoji2.png';
 import mEmoji2A from './m_emoji2_ano.png';
 import micOn from './mic_on.png';
@@ -321,7 +321,7 @@ export default function Meeting({title, meetings, team}:Props) {
               <div className={`${styles.person} ${styles.person1}`}>
                 <img src={fEmoji1} alt='emoji' />
                 <div className={styles.personName}>
-                  <p>{recentMeetings[0].users[3].name}</p>
+                  <p>{recentMeetings[0].users[1].name}</p>
                 </div>
                 <div className={styles.micInfo}>
                   <div className={styles.emoji}>
@@ -333,13 +333,13 @@ export default function Meeting({title, meetings, team}:Props) {
                 </div>
               </div>
               <div className={`${styles.person} ${styles.person2}`}>
-                {/* <img src={mEmoji1} alt='emoji' /> */}
+                <img src={mEmoji1} alt='emoji' />
                 <div className={styles.personName}>
-                  <p>{recentMeetings[0].users[1].name}</p>
+                  <p>{recentMeetings[0].users[3].name}</p>
                 </div>
                 <div className={styles.micInfo}>
                   <div className={styles.emoji}>
-                    {/* <img src={mEmoji1A} alt='emoji'/> */}
+                    <img src={mEmoji1A} alt='emoji'/>
                   </div>
                   <div className={styles.mic}>
                     <img src={micOn} alt='mic' />
