@@ -253,18 +253,16 @@ export default function AddTeam({onComplete}: Prop) {
           </div>
         </div>
       </div>
-      <div className={styles.btn}>
-        <Button className={styles.btn} onClick={() => {
-          if (team1.length > 2)
-            nextPage();
-          else {
-            inputRef.current!.value = "우리의 완성도는 '완료'이다.";
-            setTeam1(inputRef.current!.value);
-            handleOk(true, team1);
-          }}}>
-          <p>다음</p>
-        </Button>
-      </div>
+      <Button className={styles.btn} onClick={() => {
+        if (team1.length > 2)
+          nextPage();
+        else {
+          inputRef.current!.value = "우리의 완성도는 '완료'이다.";
+          setTeam1(inputRef.current!.value);
+          handleOk(true, team1);
+        }}}>
+        <p>다음</p>
+      </Button>
     </div>
   )
 
@@ -307,7 +305,7 @@ export default function AddTeam({onComplete}: Prop) {
         </div>
       </div>
       <div className={styles.btns}>
-        <Button className={styles.btn} onClick={() => {nextPage();}} >
+        <Button className={styles.btn} onClick={() => {nextPage(true);}} >
           <p>이전</p>
         </Button>
         <Button className={styles.btn} onClick={() => {
@@ -363,7 +361,7 @@ export default function AddTeam({onComplete}: Prop) {
         </div>
       </div>
       <div className={styles.btns}>
-        <Button className={styles.btn} onClick={() => {nextPage();}} >
+        <Button className={styles.btn} onClick={() => {nextPage(true);}} >
           <p>이전</p>
         </Button>
         <Button className={styles.btn} onClick={() => {
@@ -419,7 +417,7 @@ export default function AddTeam({onComplete}: Prop) {
         </div>
       </div>
       <div className={styles.btns}>
-        <Button className={styles.btn} onClick={() => {nextPage();}} >
+        <Button className={styles.btn} onClick={() => {nextPage(true);}} >
           <p>이전</p>
         </Button>
         <Button className={styles.btn} onClick={() => {
@@ -475,7 +473,7 @@ export default function AddTeam({onComplete}: Prop) {
         </div>
       </div>
       <div className={styles.btns}>
-        <Button className={styles.btn} onClick={() => {nextPage();}} >
+        <Button className={styles.btn} onClick={() => {nextPage(true);}} >
           <p>이전</p>
         </Button>
         <Button className={styles.btn} onClick={() => {
@@ -504,7 +502,7 @@ export default function AddTeam({onComplete}: Prop) {
         <div><p>존&nbsp;&nbsp;&nbsp;&nbsp;중</p><p>{team5}</p></div>
       </div>
       <div className={styles.btns}>
-        <Button className={styles.btn} onClick={() => {nextPage();}} >
+        <Button className={styles.btn} onClick={() => {nextPage(true);}} >
           <p>이전</p>
         </Button>
         <Button className={styles.btn} onClick={() => {
