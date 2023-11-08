@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkTeamVillage=self.webpackChunkTeamVillage||[]).push([[280],{9280:function(e,a,s){e.exports=s.p+"static/media/female2.1670f93b3a2e2e9c32ef.svg"}}]);
