@@ -9,6 +9,20 @@ import m7 from './img/m7.png';
 import m8 from './img/m8.png';
 import m9 from './img/m9.png';
 import m10 from './img/m10.png';
+import m11 from './img/m11.png';
+import m12 from './img/m12.png';
+import m13 from './img/m13.png';
+import m14 from './img/m14.png';
+import m15 from './img/m15.png';
+import m16 from './img/m16.png';
+import m17 from './img/m17.png';
+import m18 from './img/m18.png';
+import m19 from './img/m19.png';
+import m20 from './img/m20.png';
+import m21 from './img/m21.png';
+import m22 from './img/m22.png';
+import m23 from './img/m23.png';
+import m24 from './img/m24.png';
 import prof from './img/prof.png';
 
 export class User {
@@ -173,7 +187,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '이수현',
-    emoji: m1,
+    emoji: m11,
     department: '경영학',
     number: 22000342,
     team: '끝내주조팀',
@@ -184,7 +198,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '김재호',
-    emoji: m2,
+    emoji: m12,
     department: '경영학',
     number: 22000342,
     team: '끝내주조팀',
@@ -195,7 +209,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '윤정아',
-    emoji: m3,
+    emoji: m13,
     department: '경영학',
     number: 22000342,
     team: '산중호걸팀',
@@ -206,7 +220,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '최정선',
-    emoji: m4,
+    emoji: m14,
     department: '경영학',
     number: 22000342,
     team: '산중호걸팀',
@@ -217,7 +231,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '강희진',
-    emoji: m5,
+    emoji: m15,
     department: '경영학',
     number: 22000342,
     team: '산중호걸팀',
@@ -228,7 +242,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '최유나',
-    emoji: m6,
+    emoji: m16,
     department: '경영학',
     number: 22000342,
     team: '산중호걸팀',
@@ -239,7 +253,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '최유진',
-    emoji: m7,
+    emoji: m17,
     department: '경영학',
     number: 22000342,
     team: '아자아자팀',
@@ -250,7 +264,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '김현모',
-    emoji: m8,
+    emoji: m18,
     department: '경영학',
     number: 22000342,
     team: '아자아자팀',
@@ -261,7 +275,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '조예림',
-    emoji: m9,
+    emoji: m19,
     department: '경영학',
     number: 22000342,
     team: '아자아자팀',
@@ -272,7 +286,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '박상진',
-    emoji: m10,
+    emoji: m20,
     department: '경영학',
     number: 22000342,
     team: '아자아자팀',
@@ -283,7 +297,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '윤슬기',
-    emoji: m1,
+    emoji: m21,
     department: '경영학',
     number: 22000342,
     team: '불꽃놀이팀',
@@ -294,7 +308,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '최명호',
-    emoji: m2,
+    emoji: m22,
     department: '경영학',
     number: 22000342,
     team: '불꽃놀이팀',
@@ -305,7 +319,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '황정선',
-    emoji: m3,
+    emoji: m23,
     department: '경영학',
     number: 22000342,
     team: '불꽃놀이팀',
@@ -316,7 +330,7 @@ export const defaultUsers = [
   }),
   new User({
     name: '이세하',
-    emoji: m4,
+    emoji: m24,
     department: '경영학',
     number: 22000342,
     team: '불꽃놀이팀',
