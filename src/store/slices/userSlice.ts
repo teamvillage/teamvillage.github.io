@@ -84,8 +84,8 @@ export const defaultUsers = [
     weak: '완성'
   }),
   new User({
-    name: '김재호',
-    emoji: m3,
+    name: '나영호',
+    emoji: m4,
     department: '커뮤니케이션',
     number: 21600234,
     team: '끝내주조팀',
@@ -95,8 +95,8 @@ export const defaultUsers = [
     weak: '소통'
   }),
   new User({
-    name: '나영호',
-    emoji: m4,
+    name: '이상협',
+    emoji: m3,
     department: '시각디자인',
     number: 22100235,
     team: '어벤져스팀',

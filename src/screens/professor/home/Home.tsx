@@ -18,12 +18,14 @@ import step2Img from './step2_img.png';
 import step3Img from './step3_img.png';
 import groupImg from './groupImg.png';
 import teamDetailImg from './team_detail_img.png';
+import personDetailImg from './personDetail.png';
 import assignPopup1 from './assign_popup1.png';
 import assignPopup2 from './assign_popup2.png';
 import assignPopup3 from './assign_popup3.png';
 import assignPopup4 from './assign_popup4.png';
 import assignPopup5 from './assign_popup5.png';
 import logo_mini from './logo_mini.png';
+import logo_full from './logo_full.png';
 import { assetType, loadAsset } from '../../../utils/AssetController';
 
 function Home() {
@@ -300,8 +302,8 @@ function Home() {
   const [isDetail, setIsDetail] = useState(false);
   const detailModal = (
     <div className={styles.modal}>
-      <Button onClick={() => setIsDetail(false)} className={styles.detail}>
-        <img src={teamDetailImg} />
+      <Button onClick={() => setIsDetail(false)} className={`${styles.detail} ${selectedDiv == 1 ? styles.person : ''}`}>
+        <img src={selectedDiv == 1 ? personDetailImg : teamDetailImg} />
       </Button>
     </div>
   )
@@ -309,6 +311,18 @@ function Home() {
   const [isAssignment, setIsAssignment] = useState(false);
   const [popupIndex, setPopupIndex] = useState(0);
   const [isAssignmentExist, setIsAssignmentExist] = useState(false);
+  const [isDataExist, setIsDataExist] = useState(false);
+  const data = [
+    [logo_mini, '동료평가 제출이 저조한 상황', '10.02'],
+    [logo_mini, '중간발표 공지', '10.01'],
+    [logo_full, '다들 잘하고 있나 소식이 없', '09.30'],
+    [logo_full, '1주차 수업은 온라인으로 하', '09.30'],
+    [logo_mini, '타겟층 조사', '10.02'],
+    [logo_mini, '로케 선정', '10.01'],
+    [logo_full, '타겟층 조사', '09.30'],
+    [logo_full, '로케 선정', '09.30']
+  ];
+
   const assignmentModal = () => {
     const imgs = [
       assignPopup1,
@@ -319,22 +333,54 @@ function Home() {
     ]
 
     return (
-      <div className={styles.modal}>
-        <Button 
-          className={styles.assignment} 
-          effectOff={true}
-          onClick={() => {
-            if (popupIndex == 4) {
-              setIsAssignment(false);
-              setIsAssignmentExist(true);
-              setPopupIndex(0);
-            }
-            else {
-              setPopupIndex(popupIndex + 1);
-            }
-          }}>
+      <div className={`${styles.modal}`}>
+        <div className={styles.assignment}>
           <img src={imgs[popupIndex]} />
-        </Button>
+          <Button 
+            className={styles.closeBtn}
+            effectOff={true}
+            onClick={() => {
+              setIsAssignment(false);
+              setPopupIndex(0);
+            }}>
+            <div></div>
+          </Button>
+          <Button 
+            className={styles.prevBtn}
+            effectOff={true}
+            onClick={() => {
+              if (popupIndex == 0)
+                setIsAssignment(false);
+              else
+                setPopupIndex(popupIndex - 1);
+            }}>
+            <div></div>
+          </Button>
+          <Button 
+            className={`${styles.nextBtn} ${popupIndex < 2 ? styles.fullBtn : ''}`} 
+            effectOff={true}
+            onClick={() => {
+              if (popupIndex == 4) {
+                setIsAssignment(false);
+                setIsAssignmentExist(true);
+                setPopupIndex(0);
+              }
+              else {
+                setPopupIndex(popupIndex + 1);
+              }
+            }}>
+            <div></div>
+          </Button>
+          {popupIndex == 0 &&
+          <Button
+            className={styles.checkBtn}
+            effectOff={true}
+            onClick={() => {
+              setPopupIndex(popupIndex + 1);
+            }}>
+            <div></div>
+          </Button>}
+        </div>
       </div>
     )
   }
@@ -353,20 +399,36 @@ function Home() {
           <div className={`${styles.notice} ${styles.block}`}>
             <div className={styles.header}>
               <p>공지</p>
-              <p>더보기 &gt;</p>
+              <Button onClick={() => setIsDataExist(!isDataExist)}>
+                <p>더보기 &gt;</p>
+              </Button>
             </div>
-            <div className={styles.bottom}>
+            <div className={styles.addonContent}>
               <Button className={styles.startBtn}>
                 <p>시작하기</p>
               </Button>
+              {
+                isDataExist && 
+                <div className={styles.assignments}>
+                  {data.slice(0, 3).map(e => (
+                    <div className={styles.assignment}>
+                      <img src={e[0]} />
+                      <p>{e[1]}</p>
+                      <p>{e[2]}</p>
+                    </div>
+                  ))}
+                </div>
+              }
             </div>
           </div>
           <div className={`${styles.assignment} ${styles.block}`}>
             <div className={styles.header}>
               <p>과제</p>
-              <p>더보기 &gt;</p>
+              <Button onClick={() => setIsDataExist(!isDataExist)}>
+                <p>더보기 &gt;</p>
+              </Button>
             </div>
-            <div className={styles.bottom}>
+            <div className={styles.addonContent}>
               <Button className={styles.startBtn} onClick={() => setIsAssignment(true)}>
                 <p>시작하기</p>
               </Button>
@@ -378,6 +440,18 @@ function Home() {
                     <p>1차 동료평가</p>
                     <p>10.01</p>
                   </div>
+                </div>
+              }
+              {
+                isDataExist && 
+                <div className={styles.assignments}>
+                  {data.slice(4).map(e => (
+                    <div className={styles.assignment}>
+                      <img src={e[0]} />
+                      <p>{e[1]}</p>
+                      <p>{e[2]}</p>
+                    </div>
+                  ))}
                 </div>
               }
             </div>
@@ -447,7 +521,11 @@ function Home() {
                         </td>
                         <td><p>-</p></td>
                         <td><p>{user.lastEnter}</p></td>
-                        <td><div><p>상세</p></div></td>
+                        <td>
+                          <Button onClick={() => setIsDetail(true)}>
+                            <p>상세</p>
+                          </Button>
+                        </td>
                       </tr>
                     ))
                     }
@@ -466,7 +544,7 @@ function Home() {
                           <div>
                             {team.users?.map((user, j) => 
                               <div key={j} className={styles.emojiWrapper}>
-                                <img src={user.emoji} />
+                                <img key={j} src={user.emoji} />
                               </div>)}
                           </div>
                         </td>

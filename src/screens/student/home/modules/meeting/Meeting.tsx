@@ -353,7 +353,7 @@ export default function Meeting({title, meetings, team}:Props) {
                 <img src={fEmoji2} alt='emoji' />
                 }
                 <div className={styles.personName}>
-                  <p>{recentMeetings[0].users[0].name}</p>
+                  <p>{recentMeetings[0].users[0].name} (나)</p>
                 </div>
                 <div className={styles.micInfo}>
                   <div className={styles.emoji}>

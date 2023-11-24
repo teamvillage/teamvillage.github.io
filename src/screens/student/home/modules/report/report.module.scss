@@ -99,6 +99,8 @@
 
     .cardEmoji {
       display: flex;
+      justify-content: center;
+      align-items: center;
 
       .cardEmojiBackground {
         width: 27px;
@@ -106,9 +108,16 @@
         background-color: $SUB_20;
         border-radius: 100%;
         margin-left: -6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         &:first-of-type {
           margin-left: 0;
+        }
+
+        img {
+          width: 15px;
         }
       }
     }

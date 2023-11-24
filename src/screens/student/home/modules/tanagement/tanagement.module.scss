@@ -316,6 +316,34 @@
       &:nth-of-type(odd) {
         margin-top: -7px;
       }
+
+      &:nth-of-type(1) {
+        animation: logo 2s infinite ease-in-out;
+      }
+      &:nth-of-type(2) {
+        animation: logo 2s infinite ease-in-out;
+        animation-delay: 0.3s;
+      }
+      &:nth-of-type(3) {
+        animation: logo 2s infinite ease-in-out;
+        animation-delay: 0.6s;
+      }
+      &:nth-of-type(4) {
+        animation: logo 2s infinite ease-in-out;
+        animation-delay: 0.9s;
+      }
+      &:nth-of-type(5) {
+        animation: logo 2s infinite ease-in-out;
+        animation-delay: 1.2s;
+      }
+      @keyframes logo {
+        20% {
+          transform: translateY(-20px);
+        }
+        40% {
+          transform: translateY(0px);
+        }
+      }
     }
   }
 

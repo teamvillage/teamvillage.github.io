@@ -921,6 +921,10 @@
         grid-area: person3; 
         border-radius: 15px;
         background-color: $JH_B_SUB_100;
+
+        .personName {
+          background-color: $JH_B_MAIN_100;
+        }
       }
   
       &.person4 { 

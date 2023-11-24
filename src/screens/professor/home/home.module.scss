@@ -165,6 +165,13 @@
               height: 30px;
               border: 1px solid $JH_K_10;
               border-radius: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              img {
+                width: 20px;
+              }
             }
 
             &.studentControl {
@@ -505,6 +512,34 @@
           &:nth-of-type(odd) {
             margin-top: -7px;
           }
+
+          &:nth-of-type(1) {
+            animation: logo 2s infinite ease-in-out;
+          }
+          &:nth-of-type(2) {
+            animation: logo 2s infinite ease-in-out;
+            animation-delay: 0.3s;
+          }
+          &:nth-of-type(3) {
+            animation: logo 2s infinite ease-in-out;
+            animation-delay: 0.6s;
+          }
+          &:nth-of-type(4) {
+            animation: logo 2s infinite ease-in-out;
+            animation-delay: 0.9s;
+          }
+          &:nth-of-type(5) {
+            animation: logo 2s infinite ease-in-out;
+            animation-delay: 1.2s;
+          }
+          @keyframes logo {
+            20% {
+              transform: translateY(-20px);
+            }
+            40% {
+              transform: translateY(0px);
+            }
+          }
         }
       }
     
@@ -583,6 +618,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 10px;
 
             .user {
               width: 223px;
@@ -604,6 +640,10 @@
                 align-items: center;
                 justify-content: center;
                 margin-right: 4px;
+
+                img {
+                  width: 60%;
+                }
               }
 
               .allInfo {
@@ -682,7 +722,7 @@
           .tpac {
             display: flex;
             flex-direction: column;
-            margin-top: 39px;
+            margin-top: 30px;
             
             .pac {
               display: flex;
@@ -762,15 +802,22 @@
           color: #313131;
         } 
 
-        & > p:last-of-type {
+        div > p {
           font-size: 13px;
           line-height: 18px;
           color: $JH_K_50;
         }
       }
 
-      .bottom {
+      .addonContent {
         margin-top: 8px;
+        height: 245px;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        
+        &::-webkit-scrollbar {
+          display: none;
+        }
 
         .startBtn {
           width: 100%;
@@ -852,12 +899,56 @@
       width: 639px;
       height: 684px;
     }
+
+    &.person img {
+      width: 564px;
+      height: 542px;
+    }
   }
   
   .assignment {
+    position: relative;
+
     img {
       width: 363px;
       height: 541px;
+    }
+
+    .closeBtn {
+      width: 14px;
+      height: 14px;
+      position: absolute;
+      top: 29px;
+      left: 325px;
+    }
+
+    .nextBtn {
+      width: 147px;
+      height: 33px;
+      position: absolute;
+      left: 191px;
+      top: 480px;
+
+      &.fullBtn {
+        width: 314px;
+        left: 24px;
+      }
+    }
+
+    .prevBtn {
+      width: 147px;
+      height: 33px;
+      position: absolute;
+      left: 24px;
+      top: 480px;
+    }
+
+    .checkBtn {
+      width: 113px;
+      height: 162px;
+      position: absolute;
+      top: 220px;
+      left: 203px;
     }
   }
 }

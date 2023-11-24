@@ -103,6 +103,7 @@
           height: 30px;
           padding: 6px 9px;
           border-radius: 5px;
+          font-size: 15px;
           border: 1px solid $JH_K_10;
           box-sizing: border-box;
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
@@ -150,7 +151,8 @@
 
         .emoji {
           img {
-            height: 55px;
+            height: 40px;
+            margin: 0 7px;
           }
         }
       }

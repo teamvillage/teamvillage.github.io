@@ -9,10 +9,10 @@ import checkOk from './checkOk.png';
 import checkNotOk from './checkNotOk.png';
 import infoIcon from './infoIcon.png';
 
-import userEmoji1 from '../../../../../assets/images/emojis/male1.svg';
-import userEmoji2 from '../../../../../assets/images/emojis/male2.svg';
-import userEmoji3 from '../../../../../assets/images/emojis/female1.svg';
-import userEmoji4 from '../../../../../assets/images/emojis/female2.svg';
+import userEmoji1 from '../../../../../assets/images/emojis/male1.png';
+import userEmoji2 from '../../../../../assets/images/emojis/male2.png';
+import userEmoji3 from '../../../../../assets/images/emojis/female1.png';
+import userEmoji4 from '../../../../../assets/images/emojis/female2.png';
 import { defaultUsers, User } from '../../../../../store/slices/userSlice';
 
 interface Prop {

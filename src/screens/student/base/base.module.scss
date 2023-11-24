@@ -116,6 +116,10 @@
       justify-content: center;
       box-sizing: border-box;
 
+      img {
+        width: 15px;
+      }
+
       &:not(.myEmoji) {
         margin-left: -6px;
       }
@@ -141,7 +145,7 @@
       position: absolute;
       right: -12px;
       top: 31px;
-      z-index: 1;
+      z-index: 3;
     }
   }
 }
@@ -150,7 +154,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 1;
+  z-index: 5;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -164,5 +168,18 @@
     height: 542px;
     background-color: white;
     border-radius: 15px;
+
+    img {
+      width: 100%;
+    }
   }
+}
+
+.noticeActivate {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
 }

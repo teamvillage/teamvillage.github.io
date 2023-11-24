@@ -80,14 +80,17 @@
           }
 
           &:checked + label {
-            background-color: $JH_B_MAIN_100;
+            background-color: #E8ECF7;
             &::after {
-              content: '✔';
-              text-align: center;
-              position: absolute;
-              left: 2px;
-              top: 1px;
-              color: white;
+              content: url('checkIcon.png');
+              // text-align: center;
+              // position: absolute;
+              // left: 2px;
+              // top: 1px;
+              // color: white;
+              display: flex;
+              justify-content: center;
+              align-items: center;
               font-size: 13px;
             }
           }

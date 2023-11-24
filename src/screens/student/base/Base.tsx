@@ -128,6 +128,10 @@ function Base({children, onSelectTeam, onAddTeam, customHeader, isBackExist=fals
           </Button>}
         </div>
       </div>
+      {isNotice &&
+      <Button className={styles.noticeActivate} onClick={() => setIsNotice(false)}>
+      </Button>
+      }
       <div className={styles.content}>
         {children}
       </div>

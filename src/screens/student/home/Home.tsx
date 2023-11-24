@@ -15,7 +15,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import AddTeam from './modules/addTeam/AddTeam';
 import groupImg from './group_img.png';
-import soundImg from './sound_bgimg.png';
+import star from './star.png';
+import starActive from './star_active.png';
 
 function Home() {
   const [currentTeam, setCurrentTeam] = useState<TeamInfo>();
@@ -39,44 +40,51 @@ function Home() {
         user: users[0],
         title: "PPT 샘플 제작", 
         due: moment('2023-10-01').format(),
-        start: moment('2023-09-28').format()
+        start: moment('2023-09-28').format(),
+        importance: 5
       }),
       new TodoInfo({
         user: me,
         title: "타겟층 조사",
         due: moment('2023-10-01').format(),
-        start: moment('2023-09-28').format()
+        start: moment('2023-09-28').format(),
+        importance: 4
       }),
       new TodoInfo({
         user: users[1],
         title: "로케 선정",
         due: moment('2023-10-01').format(),
-        start: moment('2023-09-23').format()
+        start: moment('2023-09-23').format(),
+        importance: 3
       }),
       new TodoInfo({
         user: me,
         title: "로케 선정",
         due: moment('2023-09-30').format(),
-        start: moment('2023-09-23').format()
+        start: moment('2023-09-23').format(),
+        importance: 5
       }),
       new TodoInfo({
         user: me,
         title: "구도, 모션 레퍼런스",
         due: moment('2023-09-29').format(),
         start: moment('2023-09-23').format(),
-        state: true
+        state: true,
+        importance: 2
       }),
       new TodoInfo({
         user: users[2],
         title: "중간 정리",
         due: moment('2023-10-01').format(),
-        start: moment('2023-09-29').format()
+        start: moment('2023-09-29').format(),
+        importance: 3
       }),
       new TodoInfo({
         user: users[2],
         title: "모션 정리",
         due: moment('2023-10-03').format(),
-        start: moment('2023-10-01').format()
+        start: moment('2023-10-01').format(),
+        importance: 4
       }),
       new TodoInfo({
         user: me,
@@ -143,13 +151,13 @@ function Home() {
   
     const teams: Array<TeamInfo> = [
       new TeamInfo({
-        name: "경 | 오인조",
-        users: [me, ...users],
-        reports: []}),
-      new TeamInfo({
         name: "인 | 어벤져스",
         users: [me, ...users],
         reports: reports}),
+      new TeamInfo({
+        name: "경 | 오인조",
+        users: [me, ...users],
+        reports: []}),
       new TeamInfo({
         name: "고 | 광고의 신", 
         users: [me, ...users], 
@@ -225,9 +233,11 @@ function Home() {
       [defaultUsers[2], "00:30:03", "네 다들 안녕히 가세요"]
     ];
 
+    const tasks = currentTeam?.reports[0].todos ?? [];
+
     return (
     <div className={styles.reportModal}>
-      <img src={soundImg} />
+      <img src={groupImg} />
       <div className={styles.flow}>
         {flow.map((item, i) => (
           <div className={styles.item} key={i}>
@@ -242,7 +252,24 @@ function Home() {
           </div>
         ))}
       </div>
-      <img src={groupImg} />
+      <div className={styles.taskList}>
+        {tasks.map((task, i) => (
+          <div className={`${styles.task} ${task.user.isEqual(me) ? styles.myTask : ''}`} key={i}>
+            <div className={styles.emoji}>
+              <img src={task.user.emoji} />
+            </div>
+            <p>{task.title}</p>
+            <div>
+              <img src={task.importance >= 1 ? starActive : star} />
+              <img src={task.importance >= 2 ? starActive : star} />
+              <img src={task.importance >= 3 ? starActive : star} />
+              <img src={task.importance >= 4 ? starActive : star} />
+              <img src={task.importance >= 5 ? starActive : star} />
+            </div>
+            <p>{moment(task.due).format('MM.DD')}</p>
+          </div>
+        ))}
+      </div>
     </div>
   )}
 
